@@ -12,19 +12,14 @@
 </head>
 <body>
 
-<header class="top">
-    <div class="top-inner">
-        <p class="top-kicker">HTML + CSS · @3efirnaya</p>
-        <h1>Шпаргалка юного веб-мастера</h1>
-        <p class="top-lead">Здесь собрано всё, что нужно, чтобы сделать свой сайт. В каждой теме есть объяснение, готовый код и блок <b>«Попробуй сам»</b>: двигай ползунки, нажимай кнопки, меняй код и сразу смотри, что получится.</p>
-        <div class="legend">
-            <span class="tag k-prep">Подготовка — где писать и хранить</span>
-            <span class="tag k-html">HTML — из чего сделана страница</span>
-            <span class="tag k-css">CSS — как она выглядит</span>
-            <span class="tag k-lay">Разметка — где что стоит</span>
-            <span class="tag k-fx">Эффекты — красота и движение</span>
-            <span class="tag k-pub">Публикация</span>
+<header class="top" id="top">
+    <div class="top-card">
+        <div class="top-logo" aria-hidden="true">&lt;/&gt;</div>
+        <div class="top-text">
+            <h1>Шпаргалка юного веб-мастера</h1>
+            <p class="top-lead">HTML и CSS с примерами, которые можно потрогать: двигай ползунки, меняй код и сразу смотри результат.</p>
         </div>
+        <p class="top-author">@3efirnaya</p>
     </div>
 </header>
 
@@ -1558,7 +1553,7 @@ button {
     <p><a href="#links">Наверх ↑</a></p>
 </footer>
 
-<button type="button" class="to-top" aria-label="Наверх">↑</button>
+<a href="#top" class="to-top" aria-label="Наверх">↑</a>
 
 <script src="script.js"></script>
 </body>

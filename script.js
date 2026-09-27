@@ -160,7 +160,7 @@
         var fb = quiz.querySelector(".fb");
         quiz.querySelectorAll(".opts button").forEach(function (btn) {
             btn.addEventListener("click", function () {
-                quiz.querySelectorAll(".opts button").forEach(function (b) { b.classList.remove("wrong"); });
+                quiz.querySelectorAll(".opts button").forEach(function (b) { b.classList.remove("right", "wrong"); });
                 if (btn.hasAttribute("data-ok")) {
                     btn.classList.add("right");
                     fb.textContent = "🎉 " + fb.dataset.okText;
@@ -597,10 +597,36 @@
             document.querySelectorAll("main .sec").forEach(function (s) { io.observe(s); });
         }
 
+        /* Кнопка «Наверх». Это обычная ссылка на #top, поэтому работает даже без скрипта.
+           Скрипт только делает прокрутку плавной и прячет кнопку в начале страницы. */
         var top = document.querySelector(".to-top");
-        window.addEventListener("scroll", function () {
-            top.classList.toggle("show", window.scrollY > 800);
-        }, { passive: true });
-        top.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+        var header = document.getElementById("top");
+        function pos() {
+            return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        }
+        if ("IntersectionObserver" in window && header) {
+            new IntersectionObserver(function (entries) {
+                top.classList.toggle("show", !entries[0].isIntersecting);
+            }).observe(header);
+        } else {
+            var check = function () { top.classList.toggle("show", pos() > 600); };
+            window.addEventListener("scroll", check, { passive: true });
+            document.addEventListener("scroll", check, { passive: true, capture: true });
+            check();
+        }
+        top.addEventListener("click", function (e) {
+            e.preventDefault();
+            var start = pos();
+            try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (err) { window.scrollTo(0, 0); }
+            // если телефон не начал прокрутку (например, страница ещё ехала по инерции) — прыгаем сразу
+            setTimeout(function () {
+                if (pos() > 10 && pos() >= start - 5) {
+                    document.documentElement.scrollTop = 0;
+                    document.body.scrollTop = 0;
+                    window.scrollTo(0, 0);
+                }
+            }, 300);
+            if (history.replaceState) history.replaceState(null, "", location.pathname + location.search);
+        });
     })();
 })();

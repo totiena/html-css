@@ -72,42 +72,44 @@ kbd {
 }
 
 /* ============ ШАПКА ============ */
-.top {
-    background:
-        radial-gradient(circle at 90% 20%, rgba(255, 201, 60, .45), transparent 40%),
-        radial-gradient(circle at 10% 90%, rgba(138, 79, 240, .25), transparent 45%),
-        #fff3e3;
-    border-bottom: 3px solid var(--ink);
-    padding: 48px 16px 36px;
+.top { max-width: 1180px; margin: 0 auto; padding: 20px 16px 0; }
+.top-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: var(--paper);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px 26px 20px;
+    overflow: hidden;
 }
-.top-inner { max-width: 1180px; margin: 0 auto; }
-.top-kicker {
-    display: inline-block;
-    margin: 0 0 10px;
-    padding: 4px 12px;
-    background: var(--ink);
-    color: #fff;
-    border-radius: 999px;
-    font-weight: 800;
-    font-size: 14px;
+/* тонкая полоска из цветов всех тем */
+.top-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background-image: linear-gradient(to right, var(--prep), var(--html), var(--css), var(--lay), var(--fx), var(--pub));
 }
-.top h1 {
-    font-size: clamp(32px, 6vw, 56px);
-    font-weight: 900;
-    margin: 0 0 12px;
-    letter-spacing: -.02em;
+.top-logo {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: var(--fx-soft);
+    color: var(--fx);
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 600;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.top-lead { max-width: 720px; margin: 0 0 18px; font-size: 18px; }
-.legend { display: flex; flex-wrap: wrap; gap: 8px; }
-.tag {
-    background: var(--k-soft);
-    color: var(--k);
-    border: 2px solid var(--k);
-    border-radius: 999px;
-    padding: 3px 12px;
-    font-weight: 800;
-    font-size: 14px;
-}
+.top-text { flex: 1; min-width: 0; }
+.top h1 { margin: 0 0 4px; font-size: clamp(22px, 3.4vw, 32px); font-weight: 900; letter-spacing: -.01em; }
+.top-lead { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.5; }
+.top-author { margin: 0; align-self: flex-start; color: var(--muted); font-weight: 800; font-size: 14px; white-space: nowrap; }
 
 /* ============ РАСКЛАДКА: оглавление + контент ============ */
 .layout {
@@ -869,25 +871,35 @@ pre.rules .rule.live { background: rgba(255, 211, 110, .22); box-shadow: inset 4
     position: fixed;
     right: 18px;
     bottom: 18px;
+    z-index: 50;
     width: 48px;
     height: 48px;
     border-radius: 50%;
     border: 3px solid var(--ink);
     background: #ffc93c;
+    color: var(--ink);
     font-size: 22px;
     font-weight: 900;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
     opacity: 0;
-    pointer-events: none;
-    transition: opacity .3s, transform .2s;
+    visibility: hidden;
+    transition: opacity .3s, visibility .3s, transform .2s;
 }
-.to-top.show { opacity: 1; pointer-events: auto; }
-.to-top:hover { transform: translateY(-3px); }
+.to-top.show { opacity: 1; visibility: visible; }
+@media (hover: hover) {
+    .to-top:hover { transform: translateY(-3px); }
+}
 
 /* ============ ТЕЛЕФОНЫ И ПЛАНШЕТЫ ============ */
 @media (max-width: 900px) {
     .layout { grid-template-columns: minmax(0, 1fr); padding-top: 16px; }
-    .toc { position: sticky; top: 0; z-index: 10; max-height: none; padding: 8px; border-radius: 0 0 14px 14px; margin: -16px -16px 0; }
+    .toc { position: sticky; top: 8px; z-index: 10; max-height: none; padding: 6px 8px; }
     .toc-toggle {
         display: block;
         width: 100%;
@@ -944,3 +956,13 @@ pre.out { white-space: pre-wrap; overflow-wrap: anywhere; }
     text-decoration: none;
 }
 .contact-btn:hover { background: #ffc93c; }
+
+/* шапка на телефоне — коротко */
+@media (max-width: 600px) {
+    .top { padding-top: 12px; }
+    .top-card { padding: 16px 16px 14px; gap: 12px; flex-wrap: wrap; }
+    .top-logo { width: 42px; height: 42px; border-radius: 12px; font-size: 15px; }
+    .top-lead { font-size: 14.5px; }
+    .top-author { position: absolute; right: 14px; bottom: 10px; font-size: 12px; }
+    .top-text { flex-basis: calc(100% - 60px); padding-bottom: 12px; }
+}
