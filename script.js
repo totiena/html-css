@@ -566,6 +566,11 @@
         count();
     })();
 
+    /* ---------- Кнопка «Копировать» у почты ---------- */
+    document.querySelectorAll("[data-copy]").forEach(function (btn) {
+        btn.addEventListener("click", function () { copyText(btn.dataset.copy, btn); });
+    });
+
     /* ---------- 6. Оглавление ---------- */
     (function () {
         var toc = document.querySelector(".toc");

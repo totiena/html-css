@@ -927,3 +927,20 @@ pre.rules .rule.live { background: rgba(255, 211, 110, .22); box-shadow: inset 4
 label.ctrl.checks { flex-wrap: nowrap; }
 pre.out { white-space: pre-wrap; overflow-wrap: anywhere; }
 #editors .host-cards { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+/* контакты в подвале */
+.contact { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; margin: 10px 0; }
+.contact-mail { color: var(--ink); user-select: all; }
+.contact-btn {
+    font: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    background: #fff;
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: 4px 12px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.contact-btn:hover { background: #ffc93c; }
