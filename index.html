@@ -14,6 +14,7 @@
 
 <header class="top" id="top">
     <div class="top-card">
+        <div class="top-stripe" aria-hidden="true"></div>
         <div class="top-logo" aria-hidden="true">&lt;/&gt;</div>
         <div class="top-text">
             <h1>Шпаргалка юного веб-мастера</h1>
@@ -43,17 +44,17 @@
             <a href="#lists">Списки</a>
             <a href="#forms">Формы</a>
 
-            <p class="toc-group k-css">CSS</p>
-            <a href="#connect">Как подключить CSS</a>
-            <a href="#textcss">Цвет, шрифт, текст</a>
-            <a href="#borders">Рамки</a>
-            <a href="#spacing">Отступы</a>
-            <a href="#markers">Маркеры списков</a>
-
             <p class="toc-group k-lay">Разметка</p>
             <a href="#containers">Контейнеры</a>
             <a href="#flex">Flexbox</a>
             <a href="#position">Позиционирование</a>
+
+            <p class="toc-group k-css">CSS</p>
+            <a href="#cssrule">Как писать CSS</a>
+            <a href="#textcss">Цвет, шрифт, текст</a>
+            <a href="#borders">Рамки</a>
+            <a href="#spacing">Отступы</a>
+            <a href="#markers">Маркеры списков</a>
 
             <p class="toc-group k-fx">Эффекты</p>
             <a href="#pclass">Псевдоклассы</a>
@@ -148,6 +149,25 @@
                     <button type="button">visual-studio-code.download-free.xyz</button>
                 </div>
                 <p class="fb" data-ok-text="Верно! Это официальный сайт. Остальные только притворяются им." data-no-text="Осторожно! Похоже на правду, но это чужой сайт. Сверь адрес с тем, что написан выше."></p>
+            </div>
+
+            <h3>Для сайта нужны два файла</h3>
+            <div class="two-col">
+                <div class="mini-card file-card">
+                    <h3>📄 index.html</h3>
+                    <p><b>Что</b> есть на странице: заголовки, текст, картинки, ссылки. Пишется на языке <b>HTML</b>. Это главная страница — именно её браузер открывает первой.</p>
+                </div>
+                <div class="mini-card file-card css-file">
+                    <h3>🎨 style.css</h3>
+                    <p><b>Как</b> это выглядит: цвета, шрифты, рамки, расположение. Пишется на языке <b>CSS</b>. Один файл стилей может оформлять сразу много страниц.</p>
+                </div>
+            </div>
+            <p>Представь человека: <code>index.html</code> — это он сам, а <code>style.css</code> — его одежда. Файлы связаны одной строчкой в <code>index.html</code> — о ней в разделе <a href="#structure">«Каркас страницы»</a>. Картинки лежат рядом, обычно в папке <code>img</code>.</p>
+            <div class="folder">
+                <div class="folder-title">📁 my-site</div>
+                <div class="folder-file">📄 index.html <span class="arrow-note">← содержимое страницы</span></div>
+                <div class="folder-file">🎨 style.css <span class="arrow-note">← оформление</span></div>
+                <div class="folder-file">📁 img <span class="arrow-note">← картинки</span></div>
             </div>
 
             <h3>Куда и как сохранять файлы</h3>
@@ -303,6 +323,7 @@
                 <html lang="ru">
                 <head>
                     <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
                     <title>Название сайта</title>
                     <link rel="stylesheet" href="style.css">
                 </head>
@@ -328,6 +349,68 @@
             </script>
 
             <div class="tip">💡 <b>Отступы в коде</b> браузер не видит, они нужны людям. Вложенный тег сдвигай вправо — так сразу видно, что где лежит.</div>
+
+            <h3>Что лежит в &lt;head&gt; и зачем</h3>
+            <p><code>&lt;head&gt;</code> — служебная часть страницы. На самом сайте её не видно, но без неё сайт работает плохо: ломаются буквы, пропадают стили, на телефоне всё становится крошечным.</p>
+            <table class="ref wrap-code">
+                <thead><tr><th>Строчка</th><th>Зачем нужна</th></tr></thead>
+                <tbody>
+                    <tr><td><code>&lt;meta charset="UTF-8"&gt;</code></td><td>Говорит браузеру, как читать буквы. Без неё русский текст может превратиться в непонятные значки</td></tr>
+                    <tr><td><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></td><td>Нужна для телефонов: без неё сайт на телефоне показывается мелко, как на большом экране</td></tr>
+                    <tr><td><code>&lt;title&gt;…&lt;/title&gt;</code></td><td>Название сайта на вкладке браузера и в закладках</td></tr>
+                    <tr><td><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></td><td>Подключает файл со стилями. Без неё страница будет без цветов и оформления</td></tr>
+                </tbody>
+            </table>
+
+            <div class="lab" id="lab-head">
+                <p class="lab-title">🧪 Попробуй сам: убирай строчки из head и смотри, что сломается</p>
+                <div class="lab-grid">
+                    <div class="controls">
+                        <label class="ctrl checks"><input type="checkbox" data-k="charset" checked> <code>&lt;meta charset&gt;</code> — буквы</label>
+                        <label class="ctrl checks"><input type="checkbox" data-k="viewport" checked> <code>&lt;meta viewport&gt;</code> — телефон</label>
+                        <label class="ctrl checks"><input type="checkbox" data-k="title" checked> <code>&lt;title&gt;</code> — вкладка</label>
+                        <label class="ctrl checks"><input type="checkbox" data-k="link" checked> <code>&lt;link&gt;</code> — стили</label>
+                        <p class="note" data-note></p>
+                    </div>
+                    <div>
+                        <div class="fake-wrap">
+                            <div class="fake-browser">
+                                <div class="fb-bar"><span class="fb-dots"><i></i><i></i><i></i></span><span class="fb-tab"></span></div>
+                                <div class="fb-page">
+                                    <div class="fb-header" data-t="head"></div>
+                                    <div class="fb-main"><div class="fb-h1" data-t="h1"></div><div class="fb-p" data-t="p"></div></div>
+                                </div>
+                            </div>
+                            <div class="fake-phone"><div class="fp-screen"><div class="fp-zoom">
+                                <div class="fb-header" data-t="head"></div>
+                                <div class="fb-main"><div class="fb-h1" data-t="h1"></div><div class="fb-p" data-t="p"></div></div>
+                            </div></div><small>телефон</small></div>
+                        </div>
+                        <pre class="out"><code></code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Как подключить CSS-файл</h3>
+            <ol class="steps">
+                <li>Создай файл <code>style.css</code> в той же папке, что и <code>index.html</code>.</li>
+                <li>В <code>index.html</code> внутри <code>&lt;head&gt;</code> добавь строчку:
+                    <script type="text/plain" class="code" data-lang="html">
+                        <link rel="stylesheet" href="style.css">
+                    </script>
+                </li>
+                <li>Все стили пиши в <code>style.css</code>. Теги <code>&lt;style&gt;</code> там не нужны.</li>
+            </ol>
+            <div class="warn">⚠️ Имя файла в <code>href</code> должно совпадать <b>до буквы</b>: <code>Style.css</code> и <code>style.css</code> — это разные файлы. Если CSS лежит в папке <code>css</code>, пиши путь с папкой: <code>href="css/style.css"</code>.</div>
+            <div class="quiz">
+                <p class="q">🧩 Проверь себя: какая строчка правильно подключает CSS?</p>
+                <div class="opts">
+                    <button type="button">&lt;css src="style.css"&gt;</button>
+                    <button type="button" data-ok>&lt;link rel="stylesheet" href="style.css"&gt;</button>
+                    <button type="button">&lt;a href="style.css"&gt;</button>
+                </div>
+                <p class="fb" data-ok-text="Точно! Тег link с rel=&quot;stylesheet&quot; внутри head." data-no-text="Не то. Для CSS нужен тег link с rel=&quot;stylesheet&quot;."></p>
+            </div>
 
             <div class="play">
                 <p class="lab-title">✏️ Попробуй сам: поменяй текст и цвета</p>
@@ -596,264 +679,82 @@ button {
                 </div>
                 <button type="button" class="btn-reset">↺ Вернуть как было</button>
             </div>
-        </section>
 
-        <!-- ===== ПОДКЛЮЧЕНИЕ CSS ===== -->
-        <section id="connect" class="sec k-css">
-            <div class="sec-head"><span class="badge">CSS</span><h2>Как подключить CSS-файл</h2></div>
-            <p class="lead">HTML говорит, <b>что</b> есть на странице. CSS говорит, <b>как</b> это выглядит. Лучше всего хранить CSS в отдельном файле и «привязать» его к странице одной строчкой.</p>
+            <h3>Куда уходят данные из формы?</h3>
+            <div class="warn">⚠️ <b>Пока — никуда.</b> Сама по себе HTML-форма ничего не хранит и никуда не отправляет. Человек нажмёт «Отправить», страница перезагрузится, и всё, что он написал, пропадёт. Тебе ничего не придёт.</div>
+            <p>Чтобы ответы сохранялись, нужен <b>сервер</b> — компьютер, который примет данные и запишет их. У сайта на GitHub Pages своего сервера нет, поэтому многие пользуются бесплатными сервисами, которые принимают формы.</p>
 
-            <div class="folder">
-                <div class="folder-title">📁 my-site</div>
-                <div class="folder-file">📄 index.html <span class="arrow-note">← главная страница</span></div>
-                <div class="folder-file">🎨 style.css <span class="arrow-note">← все стили</span></div>
-                <div class="folder-file">🖼️ cat.jpg <span class="arrow-note">← картинки</span></div>
+            <div class="lab" id="lab-send">
+                <p class="lab-title">📨 Попробуй сам: заполни форму, нажми «Отправить» и посмотри, что форма передала бы</p>
+                <div class="lab-grid">
+                    <div class="controls">
+                        <form class="send-form" novalidate>
+                            <label class="ctrl">Имя <input type="text" name="name" placeholder="Маша"></label>
+                            <label class="ctrl">Сообщение <input type="text" name="message" data-field="message" placeholder="Классный сайт!"></label>
+                            <div class="ctrl">Понравился сайт?
+                                <div class="checks-row">
+                                    <label><input type="radio" name="like" value="да"> да</label>
+                                    <label><input type="radio" name="like" value="нет"> нет</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="demo-btn">Отправить</button>
+                        </form>
+                        <label class="ctrl checks"><input type="checkbox" data-k="noname"> <span>убрать <code>name</code> у поля «Сообщение»</span></label>
+                    </div>
+                    <div>
+                        <div class="send-result" aria-live="polite">Здесь появится то, что форма отправила бы. Пока ничего не отправлено.</div>
+                        <pre class="out"><code></code></pre>
+                    </div>
+                </div>
             </div>
+            <div class="tip">💡 Форма отправляет только поля, у которых есть атрибут <code>name</code>. Данные уходят парами <b>имя поля = что написали</b>. Нет <code>name</code> — поле не отправится, даже если его заполнили.</div>
 
+            <h3>Способ 1. Google Формы — проще всего</h3>
+            <p>Форму делаешь не кодом, а в конструкторе Google, а потом вставляешь её на свой сайт. Ответы собираются в Google Форме и в Google Таблице.</p>
             <ol class="steps">
-                <li>Создай файл <code>style.css</code> в той же папке, что и <code>index.html</code>.</li>
-                <li>В <code>index.html</code> внутри <code>&lt;head&gt;</code> добавь строчку:
+                <li>Вместе со взрослым открой <a href="https://forms.google.com" target="_blank" rel="noopener">forms.google.com</a> и создай форму с вопросами.</li>
+                <li>Нажми <b>«Опубликовать»</b> справа вверху. Неопубликованная форма ответы не принимает.</li>
+                <li>Нажми на три точки <b>⋮</b> рядом → <b>«Встроить HTML»</b> (Embed HTML) → <b>«Копировать»</b>.</li>
+                <li>Вставь скопированный код в свой <code>index.html</code> — туда, где должна быть форма:
                     <script type="text/plain" class="code" data-lang="html">
-                        <link rel="stylesheet" href="style.css">
+                        <iframe src="https://docs.google.com/forms/d/e/КОД_ФОРМЫ/viewform?embedded=true"
+                            width="640" height="800">Загрузка…</iframe>
                     </script>
                 </li>
-                <li>Пиши стили в <code>style.css</code>. Теги <code>&lt;style&gt;</code> там не нужны:
-                    <script type="text/plain" class="code" data-lang="css">
-                        p {
-                            color: darkblue;
-                        }
-                    </script>
-                </li>
+                <li>Ответы смотри в форме на вкладке <b>«Ответы»</b>. Оттуда же их можно открыть в Google Таблице.</li>
             </ol>
-            <div class="warn">⚠️ Имя файла в <code>href</code> должно совпадать <b>до буквы</b>: <code>Style.css</code> и <code>style.css</code> — это разные файлы. Если CSS лежит в папке <code>css</code>, пиши путь с папкой: <code>href="css/style.css"</code>.</div>
+            <p>Минус: оформить такую форму своим CSS не получится — она выглядит как Google Форма.</p>
 
-            <h3>Как устроено правило CSS</h3>
-            <div class="rule-anatomy">
-                <span class="ra-part ra-sel">h1<small>селектор — кого красим</small></span>
-                <span class="ra-brace">{</span>
-                <span class="ra-part ra-prop">color<small>свойство — что меняем</small></span>
-                <span class="ra-colon">:</span>
-                <span class="ra-part ra-val">red<small>значение — на что</small></span>
-                <span class="ra-colon">;</span>
-                <span class="ra-brace">}</span>
-            </div>
-
+            <h3>Способ 2. Своя форма + Formspree</h3>
+            <p>Форму пишешь сам, на HTML и CSS, как в примерах выше. А принимает ответы сервис <b>Formspree</b> и пересылает их тебе на почту. Бесплатно — до 50 ответов в месяц.</p>
+            <ol class="steps">
+                <li>Вместе со взрослым зарегистрируйся на <a href="https://formspree.io" target="_blank" rel="noopener">formspree.io</a> и создай форму (<b>New Form</b>). Сервис даст адрес вида <code>https://formspree.io/f/abcdwxyz</code>.</li>
+                <li>Впиши этот адрес в <code>action</code>, а в <code>method</code> — <code>POST</code>.</li>
+                <li>Проверь, что у каждого поля есть <code>name</code>.</li>
+            </ol>
+            <script type="text/plain" class="code" data-lang="html">
+                <form action="https://formspree.io/f/abcdwxyz" method="POST">
+                    <input type="text" name="name" placeholder="Имя">
+                    <input type="email" name="email" placeholder="Почта">
+                    <textarea name="message"></textarea>
+                    <button type="submit">Отправить</button>
+                </form>
+            </script>
             <table class="ref">
-                <thead><tr><th>Селектор</th><th>Кого выбирает</th><th>В HTML</th></tr></thead>
+                <thead><tr><th>Атрибут</th><th>Что значит</th></tr></thead>
                 <tbody>
-                    <tr><td><code>p</code></td><td>Все абзацы</td><td><code>&lt;p&gt;</code></td></tr>
-                    <tr><td><code>.card</code></td><td>Всех, у кого такой класс (точка!)</td><td><code>&lt;div class="card"&gt;</code></td></tr>
-                    <tr><td><code>#logo</code></td><td>Одного, у кого такой id (решётка!)</td><td><code>&lt;img id="logo"&gt;</code></td></tr>
-                    <tr><td><code>header p</code></td><td>Абзацы, которые лежат внутри шапки</td><td><code>&lt;header&gt;&lt;p&gt;</code></td></tr>
+                    <tr><td><code>action</code></td><td>Куда отправить данные — адрес сервиса</td></tr>
+                    <tr><td><code>method="POST"</code></td><td>Как отправить: «спрятать в конверт», чтобы данные не попали в адресную строку</td></tr>
+                    <tr><td><code>name</code></td><td>Подпись поля. По ней ты поймёшь, где в письме имя, а где сообщение</td></tr>
                 </tbody>
             </table>
-
-            <div class="play">
-                <p class="lab-title">✏️ Попробуй сам: сделай класс .star жёлтым, а #special — большим</p>
-                <div class="play-grid">
-                    <div class="play-code">
-                        <label>HTML</label>
-<textarea data-lang="html" spellcheck="false"><p>Обычный абзац</p>
-<p class="star">Абзац с классом star</p>
-<p class="star">Ещё один с классом star</p>
-<p id="special">Особенный абзац с id</p></textarea>
-                        <label>CSS</label>
-<textarea data-lang="css" spellcheck="false">p {
-  color: gray;
-}
-.star {
-  color: purple;
-}
-#special {
-  font-size: 24px;
-}</textarea>
-                    </div>
-                    <div class="play-result"><label>Результат</label><iframe title="Результат" sandbox="allow-popups"></iframe></div>
-                </div>
-                <button type="button" class="btn-reset">↺ Вернуть как было</button>
-            </div>
-
-            <div class="quiz">
-                <p class="q">🧩 Проверь себя: какая строчка правильно подключает CSS?</p>
-                <div class="opts">
-                    <button type="button">&lt;css src="style.css"&gt;</button>
-                    <button type="button" data-ok>&lt;link rel="stylesheet" href="style.css"&gt;</button>
-                    <button type="button">&lt;a href="style.css"&gt;</button>
-                </div>
-                <p class="fb" data-ok-text="Точно! Тег link с rel=&quot;stylesheet&quot; внутри head." data-no-text="Не то. Для CSS нужен тег link с rel=&quot;stylesheet&quot;."></p>
-            </div>
-        </section>
-
-        <!-- ===== ЦВЕТ, ШРИФТ, ТЕКСТ ===== -->
-        <section id="textcss" class="sec k-css">
-            <div class="sec-head"><span class="badge">CSS</span><h2>Цвет, шрифт и текст</h2></div>
-            <p class="lead">Каждое свойство пишется так: <code>свойство: значение;</code> — обязательно с <b>двоеточием</b> и <b>точкой с запятой</b> в конце.</p>
-
-            <table class="ref">
-                <thead><tr><th>Свойство</th><th>Что делает</th><th>Примеры</th></tr></thead>
-                <tbody>
-                    <tr><td><code>color</code></td><td>Цвет текста</td><td><code>red</code>, <code>#333333</code></td></tr>
-                    <tr><td><code>background-color</code></td><td>Цвет фона</td><td><code>lightyellow</code></td></tr>
-                    <tr><td><code>font-family</code></td><td>Шрифт</td><td><code>Arial</code>, <code>Georgia</code></td></tr>
-                    <tr><td><code>font-size</code></td><td>Размер текста</td><td><code>18px</code></td></tr>
-                    <tr><td><code>text-align</code></td><td>Выравнивание</td><td><code>left</code>, <code>center</code>, <code>right</code></td></tr>
-                    <tr><td><code>font-weight</code></td><td>Жирный</td><td><code>bold</code></td></tr>
-                    <tr><td><code>font-style</code></td><td>Курсив</td><td><code>italic</code></td></tr>
-                    <tr><td><code>text-decoration</code></td><td>Подчёркивание</td><td><code>underline</code>, <code>none</code></td></tr>
-                </tbody>
-            </table>
-            <div class="warn">⚠️ <code>b</code>, <code>i</code>, <code>u</code> и <code>br</code> — это <b>теги HTML</b>, их не пишут в CSS. В CSS жирный — <code>font-weight: bold</code>, курсив — <code>font-style: italic</code>, подчёркивание — <code>text-decoration: underline</code>.</div>
-
-            <div class="lab" id="lab-text">
-                <p class="lab-title">🎛️ Попробуй сам: настрой абзац и посмотри, какой получится код</p>
-                <div class="lab-grid">
-                    <div class="controls">
-                        <label class="ctrl">Цвет текста <input type="color" data-k="color" value="#24213b"></label>
-                        <label class="ctrl">Цвет фона <input type="color" data-k="bg" value="#fff1cc"></label>
-                        <label class="ctrl">Шрифт
-                            <select data-k="font">
-                                <option value="Arial">Arial</option>
-                                <option value="Georgia">Georgia</option>
-                                <option value="Verdana">Verdana</option>
-                                <option value='"Times New Roman"'>Times New Roman</option>
-                                <option value='"Courier New"'>Courier New</option>
-                                <option value='"Comic Sans MS"'>Comic Sans MS</option>
-                            </select>
-                        </label>
-                        <label class="ctrl">Размер: <b data-show="size"></b>px <input type="range" min="10" max="44" value="20" data-k="size"></label>
-                        <div class="ctrl">Выравнивание
-                            <div class="chips" data-k="align">
-                                <button type="button" data-v="left" class="on">left</button>
-                                <button type="button" data-v="center">center</button>
-                                <button type="button" data-v="right">right</button>
-                            </div>
-                        </div>
-                        <div class="ctrl checks">
-                            <label><input type="checkbox" data-k="bold"> <b>жирный</b></label>
-                            <label><input type="checkbox" data-k="italic"> <i>курсив</i></label>
-                            <label><input type="checkbox" data-k="under"> <u>подчеркнуть</u></label>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="stage"><p class="demo">Привет! Я абзац. Меняй мои настройки слева.</p></div>
-                        <pre class="out"><code></code></pre>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== РАМКИ ===== -->
-        <section id="borders" class="sec k-css">
-            <div class="sec-head"><span class="badge">CSS</span><h2>Рамки (границы)</h2></div>
-            <p class="lead">Рамка пишется тремя словами: <b>толщина, вид, цвет</b> — <code>border: 3px dashed red;</code></p>
-            <table class="ref border-table">
-                <thead><tr><th>Вид</th><th>Что значит</th><th>Как выглядит</th></tr></thead>
-                <tbody>
-                    <tr><td><code>solid</code></td><td>сплошная</td><td><span class="bs" style="border-style:solid"></span></td></tr>
-                    <tr><td><code>dashed</code></td><td>пунктирная</td><td><span class="bs" style="border-style:dashed"></span></td></tr>
-                    <tr><td><code>dotted</code></td><td>точками</td><td><span class="bs" style="border-style:dotted"></span></td></tr>
-                    <tr><td><code>double</code></td><td>двойная</td><td><span class="bs" style="border-style:double"></span></td></tr>
-                    <tr><td><code>groove</code></td><td>объёмная «канавка»</td><td><span class="bs" style="border-style:groove"></span></td></tr>
-                    <tr><td><code>ridge</code></td><td>объёмная «выпуклая»</td><td><span class="bs" style="border-style:ridge"></span></td></tr>
-                    <tr><td><code>inset</code></td><td>блок будто вдавлен</td><td><span class="bs" style="border-style:inset"></span></td></tr>
-                    <tr><td><code>outset</code></td><td>блок будто выпуклый</td><td><span class="bs" style="border-style:outset"></span></td></tr>
-                </tbody>
-            </table>
-            <p>Рамку можно сделать только с одной стороны: <code>border-top</code>, <code>border-right</code>, <code>border-bottom</code>, <code>border-left</code>. Углы закругляет <code>border-radius</code>, а <code>border-radius: 50%</code> превращает квадрат в круг.</p>
-
-            <div class="lab" id="lab-border">
-                <p class="lab-title">🎛️ Попробуй сам: собери свою рамку</p>
-                <div class="lab-grid">
-                    <div class="controls">
-                        <label class="ctrl">Толщина: <b data-show="w"></b>px <input type="range" min="0" max="16" value="6" data-k="w"></label>
-                        <label class="ctrl">Вид
-                            <select data-k="style">
-                                <option>solid</option><option selected>dashed</option><option>dotted</option><option>double</option>
-                                <option>groove</option><option>ridge</option><option>inset</option><option>outset</option>
-                            </select>
-                        </label>
-                        <label class="ctrl">Цвет <input type="color" data-k="color" value="#3d7bff"></label>
-                        <label class="ctrl">Закругление: <b data-show="r"></b>px <input type="range" min="0" max="80" value="12" data-k="r"></label>
-                        <div class="ctrl">С какой стороны
-                            <div class="chips" data-k="side">
-                                <button type="button" data-v="border" class="on">все</button>
-                                <button type="button" data-v="border-top">top</button>
-                                <button type="button" data-v="border-right">right</button>
-                                <button type="button" data-v="border-bottom">bottom</button>
-                                <button type="button" data-v="border-left">left</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="stage center"><div class="demo border-demo">Я блок</div></div>
-                        <pre class="out"><code></code></pre>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== ОТСТУПЫ ===== -->
-        <section id="spacing" class="sec k-css">
-            <div class="sec-head"><span class="badge">CSS</span><h2>Отступы: padding и margin</h2></div>
-            <p class="lead">Представь подарок в коробке. <b>padding</b> — это мягкая бумага <b>внутри</b> коробки, между рамкой и подарком. <b>margin</b> — расстояние <b>снаружи</b>, от коробки до соседних коробок.</p>
-            <div class="lab" id="lab-spacing">
-                <p class="lab-title">🎛️ Попробуй сам: полоски — это margin, голубое — padding</p>
-                <div class="lab-grid">
-                    <div class="controls">
-                        <label class="ctrl">padding (внутри): <b data-show="pad"></b>px <input type="range" min="0" max="50" value="20" data-k="pad"></label>
-                        <label class="ctrl">margin (снаружи): <b data-show="mar"></b>px <input type="range" min="0" max="50" value="20" data-k="mar"></label>
-                    </div>
-                    <div>
-                        <div class="stage">
-                            <div class="sp-parent"><div class="demo sp-box"><span class="sp-content">Содержимое</span></div></div>
-                            <div class="sp-neighbour">Соседний блок</div>
-                        </div>
-                        <pre class="out"><code></code></pre>
-                    </div>
-                </div>
-            </div>
-            <div class="tip">💡 <code>margin: 0 auto;</code> ставит блок с заданной шириной (<code>width</code>) ровно по центру страницы.</div>
-        </section>
-
-        <!-- ===== МАРКЕРЫ ===== -->
-        <section id="markers" class="sec k-css">
-            <div class="sec-head"><span class="badge">CSS</span><h2>Маркеры списков</h2></div>
-            <p class="lead">Точки и цифры в списке можно поменять свойством <code>list-style-type</code>, а вместо маркера поставить картинку через <code>list-style-image</code>.</p>
-            <div class="lab" id="lab-markers">
-                <p class="lab-title">🎛️ Попробуй сам: выбери маркер</p>
-                <div class="lab-grid">
-                    <div class="controls">
-                        <div class="ctrl">Маркер
-                            <div class="chips" data-k="type">
-                                <button type="button" data-v="disc" class="on">● disc</button>
-                                <button type="button" data-v="circle">○ circle</button>
-                                <button type="button" data-v="square">■ square</button>
-                                <button type="button" data-v="decimal">1 decimal</button>
-                                <button type="button" data-v="upper-roman">I upper-roman</button>
-                                <button type="button" data-v="lower-alpha">a lower-alpha</button>
-                                <button type="button" data-v="none">нет · none</button>
-                                <button type="button" data-v="image">⭐ картинка</button>
-                            </div>
-                        </div>
-                        <div class="ctrl">Где стоит маркер
-                            <div class="chips" data-k="pos">
-                                <button type="button" data-v="outside" class="on">outside (снаружи)</button>
-                                <button type="button" data-v="inside">inside (внутри)</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="stage"><ul class="demo marker-demo"><li>Кошки</li><li>Собаки</li><li>Хомяки</li></ul></div>
-                        <pre class="out"><code></code></pre>
-                    </div>
-                </div>
-            </div>
-            <div class="tip">💡 Для картинки-маркера положи маленькую картинку (примерно 16×16 пикселей) рядом с сайтом и укажи её имя в <code>url("…")</code>.</div>
+            <div class="warn">⚠️ <b>Про безопасность.</b> Не проси в форме адрес, телефон, пароли и другие личные данные. Для отзывов и вопросов хватит имени и сообщения. А все регистрации в сервисах — только вместе со взрослым.</div>
         </section>
 
         <!-- ===== КОНТЕЙНЕРЫ ===== -->
         <section id="containers" class="sec k-lay">
             <div class="sec-head"><span class="badge">Разметка</span><h2>Контейнеры</h2></div>
+            <div class="tip">💡 В этом блоке встретятся первые свойства CSS: <code>display</code>, <code>flex</code>, <code>position</code>. Их пишут в файле <code>style.css</code>. Как подключить этот файл — в разделе <a href="#structure">«Каркас страницы»</a>, как устроено правило CSS — в разделе <a href="#cssrule">«Как писать CSS»</a>.</div>
             <p class="lead">Контейнер — это <b>коробка</b>, в которую складывают другие элементы, чтобы красить и двигать их вместе. Главная коробка — <code>&lt;div&gt;</code>. Ей дают класс и оформляют в CSS.</p>
             <script type="text/plain" class="code" data-lang="html">
                 <div class="card">
@@ -1069,6 +970,234 @@ button {
                 }
             </script>
             <div class="tip">💡 Если элементы налезают друг на друга, <code>z-index</code> решает, кто сверху: у кого число больше, тот выше. Работает, только если <code>position</code> не <code>static</code>.</div>
+        </section>
+
+        <!-- ===== ПРАВИЛО CSS ===== -->
+        <section id="cssrule" class="sec k-css">
+            <div class="sec-head"><span class="badge">CSS</span><h2>Как писать CSS</h2></div>
+            <p class="lead">HTML говорит, <b>что</b> есть на странице. CSS говорит, <b>как</b> это выглядит. Все стили пишем в файле <code>style.css</code>, который подключили в <code>&lt;head&gt;</code> (как это сделать — в разделе <a href="#structure">«Каркас страницы»</a>). Теги <code>&lt;style&gt;</code> в файле <code>style.css</code> не нужны.</p>
+            <p>Каждое правило состоит из трёх частей:</p>
+            <div class="rule-anatomy">
+                <span class="ra-part ra-sel">h1<small>селектор — кого красим</small></span>
+                <span class="ra-brace">{</span>
+                <span class="ra-part ra-prop">color<small>свойство — что меняем</small></span>
+                <span class="ra-colon">:</span>
+                <span class="ra-part ra-val">red<small>значение — на что</small></span>
+                <span class="ra-colon">;</span>
+                <span class="ra-brace">}</span>
+            </div>
+
+            <table class="ref">
+                <thead><tr><th>Селектор</th><th>Кого выбирает</th><th>В HTML</th></tr></thead>
+                <tbody>
+                    <tr><td><code>p</code></td><td>Все абзацы</td><td><code>&lt;p&gt;</code></td></tr>
+                    <tr><td><code>.card</code></td><td>Всех, у кого такой класс (точка!)</td><td><code>&lt;div class="card"&gt;</code></td></tr>
+                    <tr><td><code>#logo</code></td><td>Одного, у кого такой id (решётка!)</td><td><code>&lt;img id="logo"&gt;</code></td></tr>
+                    <tr><td><code>header p</code></td><td>Абзацы, которые лежат внутри шапки</td><td><code>&lt;header&gt;&lt;p&gt;</code></td></tr>
+                </tbody>
+            </table>
+
+            <div class="play">
+                <p class="lab-title">✏️ Попробуй сам: сделай класс .star жёлтым, а #special — большим</p>
+                <div class="play-grid">
+                    <div class="play-code">
+                        <label>HTML</label>
+<textarea data-lang="html" spellcheck="false"><p>Обычный абзац</p>
+<p class="star">Абзац с классом star</p>
+<p class="star">Ещё один с классом star</p>
+<p id="special">Особенный абзац с id</p></textarea>
+                        <label>CSS</label>
+<textarea data-lang="css" spellcheck="false">p {
+  color: gray;
+}
+.star {
+  color: purple;
+}
+#special {
+  font-size: 24px;
+}</textarea>
+                    </div>
+                    <div class="play-result"><label>Результат</label><iframe title="Результат" sandbox="allow-popups"></iframe></div>
+                </div>
+                <button type="button" class="btn-reset">↺ Вернуть как было</button>
+            </div>
+
+            <div class="quiz">
+                <p class="q">🧩 Проверь себя: в HTML написано <code>&lt;div class="card"&gt;</code>. Как выбрать его в CSS?</p>
+                <div class="opts">
+                    <button type="button">card { }</button>
+                    <button type="button" data-ok>.card { }</button>
+                    <button type="button">#card { }</button>
+                </div>
+                <p class="fb" data-ok-text="Верно! Класс в CSS пишется с точкой." data-no-text="Не то. Решётка — для id, без знака — для тега. Для класса нужна точка."></p>
+            </div>
+        </section>
+
+        <!-- ===== ЦВЕТ, ШРИФТ, ТЕКСТ ===== -->
+        <section id="textcss" class="sec k-css">
+            <div class="sec-head"><span class="badge">CSS</span><h2>Цвет, шрифт и текст</h2></div>
+            <p class="lead">Каждое свойство пишется так: <code>свойство: значение;</code> — обязательно с <b>двоеточием</b> и <b>точкой с запятой</b> в конце.</p>
+
+            <table class="ref">
+                <thead><tr><th>Свойство</th><th>Что делает</th><th>Примеры</th></tr></thead>
+                <tbody>
+                    <tr><td><code>color</code></td><td>Цвет текста</td><td><code>red</code>, <code>#333333</code></td></tr>
+                    <tr><td><code>background-color</code></td><td>Цвет фона</td><td><code>lightyellow</code></td></tr>
+                    <tr><td><code>font-family</code></td><td>Шрифт</td><td><code>Arial</code>, <code>Georgia</code></td></tr>
+                    <tr><td><code>font-size</code></td><td>Размер текста</td><td><code>18px</code></td></tr>
+                    <tr><td><code>text-align</code></td><td>Выравнивание</td><td><code>left</code>, <code>center</code>, <code>right</code></td></tr>
+                    <tr><td><code>font-weight</code></td><td>Жирный</td><td><code>bold</code></td></tr>
+                    <tr><td><code>font-style</code></td><td>Курсив</td><td><code>italic</code></td></tr>
+                    <tr><td><code>text-decoration</code></td><td>Подчёркивание</td><td><code>underline</code>, <code>none</code></td></tr>
+                </tbody>
+            </table>
+            <div class="warn">⚠️ <code>b</code>, <code>i</code>, <code>u</code> и <code>br</code> — это <b>теги HTML</b>, их не пишут в CSS. В CSS жирный — <code>font-weight: bold</code>, курсив — <code>font-style: italic</code>, подчёркивание — <code>text-decoration: underline</code>.</div>
+
+            <div class="lab" id="lab-text">
+                <p class="lab-title">🎛️ Попробуй сам: настрой абзац и посмотри, какой получится код</p>
+                <div class="lab-grid">
+                    <div class="controls">
+                        <label class="ctrl">Цвет текста <input type="color" data-k="color" value="#24213b"></label>
+                        <label class="ctrl">Цвет фона <input type="color" data-k="bg" value="#fff1cc"></label>
+                        <label class="ctrl">Шрифт
+                            <select data-k="font">
+                                <option value="Arial">Arial</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Verdana">Verdana</option>
+                                <option value='"Times New Roman"'>Times New Roman</option>
+                                <option value='"Courier New"'>Courier New</option>
+                                <option value='"Comic Sans MS"'>Comic Sans MS</option>
+                            </select>
+                        </label>
+                        <label class="ctrl">Размер: <b data-show="size"></b>px <input type="range" min="10" max="44" value="20" data-k="size"></label>
+                        <div class="ctrl">Выравнивание
+                            <div class="chips" data-k="align">
+                                <button type="button" data-v="left" class="on">left</button>
+                                <button type="button" data-v="center">center</button>
+                                <button type="button" data-v="right">right</button>
+                            </div>
+                        </div>
+                        <div class="ctrl checks">
+                            <label><input type="checkbox" data-k="bold"> <b>жирный</b></label>
+                            <label><input type="checkbox" data-k="italic"> <i>курсив</i></label>
+                            <label><input type="checkbox" data-k="under"> <u>подчеркнуть</u></label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="stage"><p class="demo">Привет! Я абзац. Меняй мои настройки слева.</p></div>
+                        <pre class="out"><code></code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== РАМКИ ===== -->
+        <section id="borders" class="sec k-css">
+            <div class="sec-head"><span class="badge">CSS</span><h2>Рамки (границы)</h2></div>
+            <p class="lead">Рамка пишется тремя словами: <b>толщина, вид, цвет</b> — <code>border: 3px dashed red;</code></p>
+            <table class="ref border-table">
+                <thead><tr><th>Вид</th><th>Что значит</th><th>Как выглядит</th></tr></thead>
+                <tbody>
+                    <tr><td><code>solid</code></td><td>сплошная</td><td><span class="bs" style="border-style:solid"></span></td></tr>
+                    <tr><td><code>dashed</code></td><td>пунктирная</td><td><span class="bs" style="border-style:dashed"></span></td></tr>
+                    <tr><td><code>dotted</code></td><td>точками</td><td><span class="bs" style="border-style:dotted"></span></td></tr>
+                    <tr><td><code>double</code></td><td>двойная</td><td><span class="bs" style="border-style:double"></span></td></tr>
+                    <tr><td><code>groove</code></td><td>объёмная «канавка»</td><td><span class="bs" style="border-style:groove"></span></td></tr>
+                    <tr><td><code>ridge</code></td><td>объёмная «выпуклая»</td><td><span class="bs" style="border-style:ridge"></span></td></tr>
+                    <tr><td><code>inset</code></td><td>блок будто вдавлен</td><td><span class="bs" style="border-style:inset"></span></td></tr>
+                    <tr><td><code>outset</code></td><td>блок будто выпуклый</td><td><span class="bs" style="border-style:outset"></span></td></tr>
+                </tbody>
+            </table>
+            <p>Рамку можно сделать только с одной стороны: <code>border-top</code>, <code>border-right</code>, <code>border-bottom</code>, <code>border-left</code>. Углы закругляет <code>border-radius</code>, а <code>border-radius: 50%</code> превращает квадрат в круг.</p>
+
+            <div class="lab" id="lab-border">
+                <p class="lab-title">🎛️ Попробуй сам: собери свою рамку</p>
+                <div class="lab-grid">
+                    <div class="controls">
+                        <label class="ctrl">Толщина: <b data-show="w"></b>px <input type="range" min="0" max="16" value="6" data-k="w"></label>
+                        <label class="ctrl">Вид
+                            <select data-k="style">
+                                <option>solid</option><option selected>dashed</option><option>dotted</option><option>double</option>
+                                <option>groove</option><option>ridge</option><option>inset</option><option>outset</option>
+                            </select>
+                        </label>
+                        <label class="ctrl">Цвет <input type="color" data-k="color" value="#3d7bff"></label>
+                        <label class="ctrl">Закругление: <b data-show="r"></b>px <input type="range" min="0" max="80" value="12" data-k="r"></label>
+                        <div class="ctrl">С какой стороны
+                            <div class="chips" data-k="side">
+                                <button type="button" data-v="border" class="on">все</button>
+                                <button type="button" data-v="border-top">top</button>
+                                <button type="button" data-v="border-right">right</button>
+                                <button type="button" data-v="border-bottom">bottom</button>
+                                <button type="button" data-v="border-left">left</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="stage center"><div class="demo border-demo">Я блок</div></div>
+                        <pre class="out"><code></code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ОТСТУПЫ ===== -->
+        <section id="spacing" class="sec k-css">
+            <div class="sec-head"><span class="badge">CSS</span><h2>Отступы: padding и margin</h2></div>
+            <p class="lead">Представь подарок в коробке. <b>padding</b> — это мягкая бумага <b>внутри</b> коробки, между рамкой и подарком. <b>margin</b> — расстояние <b>снаружи</b>, от коробки до соседних коробок.</p>
+            <div class="lab" id="lab-spacing">
+                <p class="lab-title">🎛️ Попробуй сам: полоски — это margin, голубое — padding</p>
+                <div class="lab-grid">
+                    <div class="controls">
+                        <label class="ctrl">padding (внутри): <b data-show="pad"></b>px <input type="range" min="0" max="50" value="20" data-k="pad"></label>
+                        <label class="ctrl">margin (снаружи): <b data-show="mar"></b>px <input type="range" min="0" max="50" value="20" data-k="mar"></label>
+                    </div>
+                    <div>
+                        <div class="stage">
+                            <div class="sp-parent"><div class="demo sp-box"><span class="sp-content">Содержимое</span></div></div>
+                            <div class="sp-neighbour">Соседний блок</div>
+                        </div>
+                        <pre class="out"><code></code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="tip">💡 <code>margin: 0 auto;</code> ставит блок с заданной шириной (<code>width</code>) ровно по центру страницы.</div>
+        </section>
+
+        <!-- ===== МАРКЕРЫ ===== -->
+        <section id="markers" class="sec k-css">
+            <div class="sec-head"><span class="badge">CSS</span><h2>Маркеры списков</h2></div>
+            <p class="lead">Точки и цифры в списке можно поменять свойством <code>list-style-type</code>, а вместо маркера поставить картинку через <code>list-style-image</code>.</p>
+            <div class="lab" id="lab-markers">
+                <p class="lab-title">🎛️ Попробуй сам: выбери маркер</p>
+                <div class="lab-grid">
+                    <div class="controls">
+                        <div class="ctrl">Маркер
+                            <div class="chips" data-k="type">
+                                <button type="button" data-v="disc" class="on">● disc</button>
+                                <button type="button" data-v="circle">○ circle</button>
+                                <button type="button" data-v="square">■ square</button>
+                                <button type="button" data-v="decimal">1 decimal</button>
+                                <button type="button" data-v="upper-roman">I upper-roman</button>
+                                <button type="button" data-v="lower-alpha">a lower-alpha</button>
+                                <button type="button" data-v="none">нет · none</button>
+                                <button type="button" data-v="image">⭐ картинка</button>
+                            </div>
+                        </div>
+                        <div class="ctrl">Где стоит маркер
+                            <div class="chips" data-k="pos">
+                                <button type="button" data-v="outside" class="on">outside (снаружи)</button>
+                                <button type="button" data-v="inside">inside (внутри)</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="stage"><ul class="demo marker-demo"><li>Кошки</li><li>Собаки</li><li>Хомяки</li></ul></div>
+                        <pre class="out"><code></code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="tip">💡 Для картинки-маркера положи маленькую картинку (примерно 16×16 пикселей) рядом с сайтом и укажи её имя в <code>url("…")</code>.</div>
         </section>
 
         <!-- ===== ПСЕВДОКЛАССЫ ===== -->
@@ -1443,6 +1572,32 @@ button {
             <p class="lead">GitHub Pages бесплатно покажет твой сайт всему интернету по адресу <code>https://твой-логин.github.io/название/</code>. Отмечай галочками, что уже сделано.</p>
             <div class="tip">👨‍👩‍👧 Регистрируйся на GitHub <b>вместе со взрослым</b>: по правилам сервиса свой аккаунт можно заводить с 13 лет.</div>
 
+            <h3>Что куда загружаем</h3>
+            <p>Репозиторий на GitHub — это копия папки сайта. Всё, что лежит <b>внутри</b> папки <code>my-site</code>, загружаем <b>прямо в репозиторий</b>: так, чтобы <code>index.html</code> лежал на самом верхнем уровне, а не в какой-нибудь папке.</p>
+            <div class="upload-map">
+                <div class="folder">
+                    <div class="folder-title">💻 На компьютере: 📁 my-site</div>
+                    <div class="folder-file">📄 index.html</div>
+                    <div class="folder-file">🎨 style.css</div>
+                    <div class="folder-file">📁 img</div>
+                </div>
+                <div class="upload-arrow">→</div>
+                <div class="folder">
+                    <div class="folder-title">🌐 На GitHub: репозиторий my-site</div>
+                    <div class="folder-file">📄 index.html <span class="arrow-note">← главная страница сайта</span></div>
+                    <div class="folder-file">🎨 style.css <span class="arrow-note">← рядом, как в href</span></div>
+                    <div class="folder-file">📁 img <span class="arrow-note">← папка целиком</span></div>
+                </div>
+            </div>
+            <table class="ref">
+                <thead><tr><th>Файл</th><th>Что с ним делаем</th></tr></thead>
+                <tbody>
+                    <tr><td><code>index.html</code></td><td>Загружаем обязательно. Адрес сайта открывает именно его</td></tr>
+                    <tr><td><code>style.css</code></td><td>Загружаем туда же, куда указывает <code>&lt;link href="…"&gt;</code>. Написано <code>href="style.css"</code> — кладём рядом с <code>index.html</code></td></tr>
+                    <tr><td>📁 <code>img</code></td><td>Перетаскиваем папку целиком: пути вроде <code>src="img/cat.jpg"</code> продолжат работать</td></tr>
+                </tbody>
+            </table>
+
             <h3>Сначала проверь папку сайта</h3>
             <ul class="checklist">
                 <li><label><input type="checkbox"> <span>Главная страница называется <code>index.html</code> — маленькими буквами</span></label></li>
@@ -1457,7 +1612,7 @@ button {
                 <li><label><input type="checkbox"> <span>Нажми <b>+</b> в правом верхнем углу → <b>New repository</b> (новый репозиторий — это папка для сайта)</span></label></li>
                 <li><label><input type="checkbox"> <span>Напиши название латиницей, например <code>my-site</code>. Выбери <b>Public</b> и нажми <b>Create repository</b></span></label></li>
                 <li><label><input type="checkbox"> <span>Нажми ссылку <b>uploading an existing file</b> (или <b>Add file → Upload files</b>)</span></label></li>
-                <li><label><input type="checkbox"> <span>Перетащи <b>файлы из папки</b> сайта (не саму папку!) и нажми зелёную кнопку <b>Commit changes</b></span></label></li>
+                <li><label><input type="checkbox"> <span>Перетащи <b>всё, что внутри</b> папки <code>my-site</code> (но не саму <code>my-site</code>!) и нажми зелёную кнопку <b>Commit changes</b></span></label></li>
                 <li><label><input type="checkbox"> <span>Открой вкладку <b>Settings</b> → слева пункт <b>Pages</b></span></label></li>
                 <li><label><input type="checkbox"> <span>В <b>Source</b> выбери <b>Deploy from a branch</b></span></label></li>
                 <li><label><input type="checkbox"> <span>В <b>Branch</b> выбери <code>main</code> и <code>/ (root)</code>, нажми <b>Save</b></span></label></li>
@@ -1553,7 +1708,7 @@ button {
     <p><a href="#links">Наверх ↑</a></p>
 </footer>
 
-<a href="#top" class="to-top" aria-label="Наверх">↑</a>
+<a href="#top" class="to-top" aria-label="Наверх" title="Наверх"><span class="to-top-hint">назад</span><span class="to-top-arrow">↑</span></a>
 
 <script src="script.js"></script>
 </body>

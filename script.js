@@ -226,7 +226,7 @@
         var root = document.getElementById("lab-skeleton");
         if (!root) return;
         var info = {
-            head: ["&lt;head&gt; — голова страницы", "Её не видно на сайте. Тут лежат название вкладки <code>&lt;title&gt;</code>, кодировка и подключение CSS через <code>&lt;link&gt;</code>."],
+            head: ["&lt;head&gt; — голова страницы", "Её не видно на сайте. Тут лежат кодировка <code>&lt;meta charset&gt;</code>, настройка для телефонов <code>&lt;meta viewport&gt;</code>, название вкладки <code>&lt;title&gt;</code> и подключение CSS через <code>&lt;link&gt;</code>. Подробнее — ниже, в «Что лежит в &lt;head&gt;»."],
             header: ["&lt;header&gt; — шапка", "Верх сайта. Обычно здесь логотип, название и меню."],
             main: ["&lt;main&gt; — основное", "Всё самое главное: заголовки <code>&lt;h1&gt;</code>, абзацы <code>&lt;p&gt;</code>, картинки, ссылки, таблицы, формы. Такой тег на странице только один."],
             footer: ["&lt;footer&gt; — подвал", "Низ сайта: адрес, телефон, почта, соцсети."]
@@ -258,6 +258,75 @@
         note(root, info[v.where][1]);
         showCode(root, '<img src="' + info[v.where][0] + '" alt="Картинка">', "html");
     });
+
+    /* Что лежит в head: убираем строчки и смотрим, что сломается */
+    lab("lab-head", function (v, root) {
+        var ok = { head: "Мой сайт про котиков", h1: "Привет!", p: "Здесь я расскажу про своего кота." };
+        var broken = {
+            head: "РњРѕР№ СЃР°Р№С‚ РїСЂРѕ РєРѕС‚РёРєРѕРІ",
+            h1: "РџСЂРёРІРµС‚!",
+            p: "Р—РґРµСЃСЊ СЏ СЂР°СЃСЃРєР°Р¶Сѓ РїСЂРѕ СЃРІРѕРµРіРѕ РєРѕС‚Р°."
+        };
+        var text = v.charset ? ok : broken;
+        root.querySelectorAll("[data-t]").forEach(function (el) { el.textContent = text[el.dataset.t]; });
+        root.querySelector(".fb-tab").textContent = v.title ? "Мой сайт" : "index.html";
+        root.querySelector(".fake-wrap").classList.toggle("no-css", !v.link);
+        root.querySelector(".fake-phone").classList.toggle("no-viewport", !v.viewport);
+
+        var notes = [];
+        if (!v.charset) notes.push("Без <code>charset</code> браузер не понял, как читать буквы, — русский текст превратился в «кракозябры».");
+        if (!v.viewport) notes.push("Без <code>viewport</code> телефон показывает страницу как на большом экране — всё мелкое, приходится увеличивать пальцами.");
+        if (!v.title) notes.push("Без <code>&lt;title&gt;</code> на вкладке видно просто имя файла.");
+        if (!v.link) notes.push("Без <code>&lt;link&gt;</code> файл <code>style.css</code> не подключён — пропали все цвета и оформление.");
+        if (!notes.length) notes.push("Все строчки на месте — сайт выглядит как надо. Сними любую галочку!");
+        note(root, notes.join("<br><br>"));
+
+        var lines = ["<head>"];
+        if (v.charset) lines.push('    <meta charset="UTF-8">');
+        if (v.viewport) lines.push('    <meta name="viewport" content="width=device-width, initial-scale=1">');
+        if (v.title) lines.push("    <title>Мой сайт</title>");
+        if (v.link) lines.push('    <link rel="stylesheet" href="style.css">');
+        lines.push("</head>");
+        showCode(root, lines.join("\n"), "html");
+    });
+
+    /* Формы: что отправила бы форма */
+    (function () {
+        var root = document.getElementById("lab-send");
+        if (!root) return;
+        var form = root.querySelector(".send-form");
+        var msg = form.querySelector('[data-field="message"]');
+        var result = root.querySelector(".send-result");
+        var out = root.querySelector(".out code");
+        function code() {
+            var parts = ['<form>'];
+            parts.push('  <input type="text" name="name">');
+            parts.push(msg.hasAttribute("name") ? '  <input type="text" name="message">' : '  <input type="text">   <!-- нет name! -->');
+            parts.push('  <input type="radio" name="like" value="да">');
+            parts.push('  <input type="radio" name="like" value="нет">');
+            parts.push('  <button type="submit">Отправить</button>');
+            parts.push('</form>');
+            out.innerHTML = highlight(parts.join("\n"), "html");
+        }
+        root.querySelector('[data-k="noname"]').addEventListener("change", function (e) {
+            if (e.target.checked) msg.removeAttribute("name"); else msg.setAttribute("name", "message");
+            code();
+        });
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var data = new FormData(form);
+            var rows = [];
+            data.forEach(function (value, key) {
+                rows.push("<li><b>" + esc(key) + "</b> = " + (value ? esc(String(value)) : "<i>пусто</i>") + "</li>");
+            });
+            var html = "<p><b>Форма отправила бы:</b></p>";
+            html += rows.length ? "<ul>" + rows.join("") + "</ul>" : "<p>ничего — ни у одного заполненного поля нет name</p>";
+            if (!msg.hasAttribute("name")) html += "<p>❗ Поля «Сообщение» в списке нет: у него убрали <code>name</code>.</p>";
+            html += '<p class="send-lost">😢 Но отправлять некуда: у формы нет <code>action</code>. На настоящем сайте страница просто перезагрузилась бы, а данные пропали бы.</p>';
+            result.innerHTML = html;
+        });
+        code();
+    })();
 
     /* Цвет, шрифт, текст */
     lab("lab-text", function (v, root) {
@@ -566,6 +635,94 @@
         count();
     })();
 
+    /* ---------- Разноцветная полоска в шапке (векторная, SVG) ----------
+       Полоска — это SVG-прямоугольник с градиентом. Под мышкой рисуется
+       плавная «капля» того же цвета: чуть ярче, с мягким размытым краем. */
+    (function () {
+        var stripe = document.querySelector(".top-stripe");
+        if (!stripe) return;
+        var NS = "http://www.w3.org/2000/svg";
+        var names = ["--prep", "--html", "--css", "--lay", "--fx", "--pub"];
+        var css = getComputedStyle(document.documentElement);
+
+        function el(tag, attrs, parent) {
+            var e = document.createElementNS(NS, tag);
+            for (var k in attrs) e.setAttribute(k, attrs[k]);
+            if (parent) parent.appendChild(e);
+            return e;
+        }
+        var svg = el("svg", { "aria-hidden": "true" }, stripe);
+        var defs = el("defs", {}, svg);
+        var grad = el("linearGradient", { id: "stripe-grad", gradientUnits: "userSpaceOnUse", x1: 0, y1: 0, x2: 1000, y2: 0 }, defs);
+        names.forEach(function (n, i) {
+            el("stop", { offset: i / (names.length - 1), "stop-color": css.getPropertyValue(n).trim() }, grad);
+        });
+        // мягкий край + чуть ярче и сочнее
+        var filter = el("filter", { id: "stripe-soft", x: "-20%", y: "-50%", width: "140%", height: "200%" }, defs);
+        el("feGaussianBlur", { stdDeviation: "0.9" }, filter);
+        el("feColorMatrix", { type: "saturate", values: "1.5" }, filter);
+        var ct = el("feComponentTransfer", {}, filter);
+        ["feFuncR", "feFuncG", "feFuncB"].forEach(function (f) { el(f, { type: "linear", slope: "1.25" }, ct); });
+
+        // мягкий блик: белое пятно, которое плавно исчезает к краям
+        var shine = el("radialGradient", { id: "stripe-shine" }, defs);
+        el("stop", { offset: 0, "stop-color": "#fff", "stop-opacity": "0.75" }, shine);
+        el("stop", { offset: 1, "stop-color": "#fff", "stop-opacity": "0" }, shine);
+
+        var base = el("rect", { x: 0, y: 0, height: 6, fill: "url(#stripe-grad)" }, svg);
+        var drop = el("path", { fill: "url(#stripe-grad)", filter: "url(#stripe-soft)" }, svg);
+        var glow = el("ellipse", { cy: 5, ry: 7, fill: "url(#stripe-shine)", style: "mix-blend-mode: soft-light" }, svg);
+
+        var W = 1000, R = 26, DEPTH = 7;    // R — ширина капли, DEPTH — насколько она опускается
+        var x = 0, tx = 0, amp = 0, tamp = 0, running = false;
+
+        function size() {
+            W = stripe.clientWidth || 1000;
+            svg.setAttribute("viewBox", "0 0 " + W + " 22");
+            base.setAttribute("width", W);
+            grad.setAttribute("x2", W);
+        }
+        function draw() {
+            if (amp < 0.01) { drop.setAttribute("d", ""); glow.setAttribute("rx", 0); return; }
+            var from = x - R * 3, to = x + R * 3, d = "M" + from + " 5.5";
+            for (var px = from; px <= to; px += 2) {
+                var g = Math.exp(-Math.pow((px - x) / R, 2));        // плавная «колоколом» кривая
+                d += " L" + px.toFixed(1) + " " + (6 + DEPTH * amp * g).toFixed(2);
+            }
+            d += " L" + to + " 5.5 Z";
+            drop.setAttribute("d", d);
+            glow.setAttribute("cx", x.toFixed(1));
+            glow.setAttribute("rx", (R * 1.6).toFixed(1));
+            glow.setAttribute("opacity", amp.toFixed(2));
+            drop.setAttribute("opacity", Math.min(1, amp * 1.2).toFixed(2));
+        }
+        function tick() {
+            x += (tx - x) * 0.35;
+            amp += (tamp - amp) * 0.2;
+            draw();
+            if (Math.abs(tx - x) > 0.3 || Math.abs(tamp - amp) > 0.01) {
+                requestAnimationFrame(tick);
+            } else { running = false; }
+        }
+        function go() { if (!running) { running = true; requestAnimationFrame(tick); } }
+        function point(clientX, first) {
+            tx = clientX - stripe.getBoundingClientRect().left;
+            if (first) x = tx;
+            tamp = 1; go();
+        }
+        function leave() { tamp = 0; go(); }
+
+        size();
+        window.addEventListener("resize", size);
+        stripe.addEventListener("mouseenter", function (e) { point(e.clientX, amp < 0.05); });
+        stripe.addEventListener("mousemove", function (e) { point(e.clientX); });
+        stripe.addEventListener("mouseleave", leave);
+        var timer;
+        stripe.addEventListener("touchstart", function (e) { clearTimeout(timer); point(e.touches[0].clientX, true); }, { passive: true });
+        stripe.addEventListener("touchmove", function (e) { point(e.touches[0].clientX); }, { passive: true });
+        stripe.addEventListener("touchend", function () { timer = setTimeout(leave, 700); });
+    })();
+
     /* ---------- Кнопка «Копировать» у почты ---------- */
     document.querySelectorAll("[data-copy]").forEach(function (btn) {
         btn.addEventListener("click", function () { copyText(btn.dataset.copy, btn); });
@@ -587,46 +744,139 @@
         });
         var links = {};
         toc.querySelectorAll("a").forEach(function (a) { links[a.getAttribute("href").slice(1)] = a; });
-        if ("IntersectionObserver" in window) {
-            var io = new IntersectionObserver(function (entries) {
-                entries.forEach(function (en) {
-                    if (!en.isIntersecting) return;
-                    Object.keys(links).forEach(function (id) { links[id].classList.toggle("active", id === en.target.id); });
-                });
-            }, { rootMargin: "-30% 0px -65% 0px" });
-            document.querySelectorAll("main .sec").forEach(function (s) { io.observe(s); });
+        /* Подсветка текущего раздела и прокрутка меню вслед за страницей */
+        var body = toc.querySelector(".toc-body");
+        var secs = Array.prototype.slice.call(document.querySelectorAll("main .sec"));
+        var current = null, ticking = false;
+        function scrollY() {
+            return window.pageYOffset || document.documentElement.scrollTop || 0;
         }
+        function scroller() {
+            // на компьютере прокручивается само меню, на телефоне — открытый список внутри него
+            return toc.scrollHeight > toc.clientHeight + 1 ? toc : body;
+        }
+        function keepVisible(link) {
+            var box = scroller();
+            if (box.scrollHeight <= box.clientHeight + 1) return;
+            if (scrollY() < 50) { box.scrollTop = 0; return; }
+            var bottom = document.documentElement.scrollHeight - window.innerHeight - scrollY();
+            if (bottom < 50) { box.scrollTop = box.scrollHeight; return; }
+            var boxRect = box.getBoundingClientRect();
+            var r = link.getBoundingClientRect();
+            var pad = 40;
+            if (r.top < boxRect.top + pad) {
+                box.scrollTop -= boxRect.top + pad - r.top;
+            } else if (r.bottom > boxRect.bottom - pad) {
+                box.scrollTop += r.bottom - (boxRect.bottom - pad);
+            }
+        }
+        function update() {
+            ticking = false;
+            var line = window.innerHeight * 0.35;
+            var id = secs[0].id;
+            for (var i = 0; i < secs.length; i++) {
+                if (secs[i].getBoundingClientRect().top <= line) id = secs[i].id; else break;
+            }
+            if (document.documentElement.scrollHeight - window.innerHeight - scrollY() < 4) id = secs[secs.length - 1].id;
+            if (id !== current) {
+                current = id;
+                Object.keys(links).forEach(function (k) { links[k].classList.toggle("active", k === id); });
+            }
+            if (links[id]) keepVisible(links[id]);
+        }
+        window.addEventListener("scroll", function () {
+            if (!ticking) { ticking = true; requestAnimationFrame(update); }
+        }, { passive: true });
+        window.addEventListener("resize", update);
+        update();
 
-        /* Кнопка «Наверх». Это обычная ссылка на #top, поэтому работает даже без скрипта.
-           Скрипт только делает прокрутку плавной и прячет кнопку в начале страницы. */
+        /* Кнопка «Наверх» + «Назад», как на Фикбуке.
+           Обычно кнопка везёт наверх. После любого прыжка (наверх, по ссылке в тексте
+           или в меню) она запоминает, где ты был, и превращается в «назад» —
+           стрелка показывает, куда вернёт. Без скрипта это просто ссылка на #top. */
         var top = document.querySelector(".to-top");
+        var arrow = top.querySelector(".to-top-arrow");
+        var hint = top.querySelector(".to-top-hint");
         var header = document.getElementById("top");
+        var saved = null;          // куда вернуться
+        var jumping = false;       // идёт прыжок — не сбрасываем «назад»
+        var headerVisible = true;
         function pos() {
             return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
         }
-        if ("IntersectionObserver" in window && header) {
-            new IntersectionObserver(function (entries) {
-                top.classList.toggle("show", !entries[0].isIntersecting);
-            }).observe(header);
-        } else {
-            var check = function () { top.classList.toggle("show", pos() > 600); };
-            window.addEventListener("scroll", check, { passive: true });
-            document.addEventListener("scroll", check, { passive: true, capture: true });
-            check();
+        function render() {
+            var back = saved !== null;
+            top.classList.toggle("back", back);
+            top.classList.toggle("show", back || !headerVisible);
+            if (back) {
+                var down = saved > pos();
+                arrow.textContent = down ? "↓" : "↑";
+                top.setAttribute("aria-label", "Вернуться назад");
+                top.title = "Вернуться туда, где был";
+            } else {
+                arrow.textContent = "↑";
+                top.setAttribute("aria-label", "Наверх");
+                top.title = "Наверх";
+            }
         }
-        top.addEventListener("click", function (e) {
-            e.preventDefault();
+        function scrollToY(y) {
             var start = pos();
-            try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (err) { window.scrollTo(0, 0); }
-            // если телефон не начал прокрутку (например, страница ещё ехала по инерции) — прыгаем сразу
+            jumping = true;
+            try { window.scrollTo({ top: y, behavior: "smooth" }); } catch (err) { window.scrollTo(0, y); }
+            // если телефон не начал прокрутку (страница ещё ехала по инерции) — прыгаем сразу
             setTimeout(function () {
-                if (pos() > 10 && pos() >= start - 5) {
-                    document.documentElement.scrollTop = 0;
-                    document.body.scrollTop = 0;
-                    window.scrollTo(0, 0);
+                if (Math.abs(pos() - y) > 10 && Math.abs(pos() - start) < 5) {
+                    document.documentElement.scrollTop = y;
+                    document.body.scrollTop = y;
+                    window.scrollTo(0, y);
                 }
             }, 300);
+        }
+        function remember() {
+            saved = pos();
+            jumping = true;
+            render();
+        }
+        if ("IntersectionObserver" in window && header) {
+            new IntersectionObserver(function (entries) {
+                headerVisible = entries[0].isIntersecting;
+                render();
+            }).observe(header);
+        } else {
+            headerVisible = false;
+        }
+        // когда прыжок закончился — продолжаем следить; если сам доскроллил до места — «назад» не нужен
+        var stopTimer;
+        window.addEventListener("scroll", function () {
+            if (!headerVisible && !("IntersectionObserver" in window)) headerVisible = pos() < 300;
+            clearTimeout(stopTimer);
+            stopTimer = setTimeout(function () {
+                if (jumping) { jumping = false; }
+                else if (saved !== null && Math.abs(pos() - saved) < 150) { saved = null; }
+                render();
+            }, 150);
+            if (saved !== null) render();
+        }, { passive: true });
+
+        top.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (saved !== null) {
+                var y = saved;
+                saved = null;
+                scrollToY(y);
+            } else {
+                remember();
+                scrollToY(0);
+            }
+            render();
             if (history.replaceState) history.replaceState(null, "", location.pathname + location.search);
+        });
+        // ссылки внутри страницы (меню, «прыгни к таблицам», «смотри раздел…»)
+        document.addEventListener("click", function (e) {
+            var a = e.target.closest && e.target.closest('a[href^="#"]');
+            if (!a || a === top || a.getAttribute("href").length < 2) return;
+            if (!document.getElementById(a.getAttribute("href").slice(1))) return;
+            remember();
         });
     })();
 })();
