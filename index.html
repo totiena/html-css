@@ -1276,7 +1276,7 @@ button {
         <section id="pclass" class="sec k-fx">
             <div class="sec-head"><span class="badge">Эффекты</span><h2>Псевдоклассы</h2></div>
             <p class="lead">Псевдокласс — это стиль для <b>особого состояния</b> элемента: когда на него навели мышку, нажали или когда он первый в списке. Пишется через <b>одно двоеточие</b>: <code>button:hover</code>.</p>
-            <div class="dict" data-words="pseudo-class|:hover|:active|:focus|:visited|:link|:first-child|:last-child|:nth-child|odd|even|:checked|:not|transition"></div>
+            <div class="dict" data-words="pseudo-class|:hover|:active|:focus|:visited|:link|:first-child|:last-child|:nth-child|:nth-last-child|:first-of-type|:last-of-type|odd|even|:checked|:not|transition"></div>
 
             <div class="lab" id="lab-states">
                 <p class="lab-title">🖱️ Попробуй сам: наведи, нажми, кликни в поле — в коде загорится правило, которое сейчас работает</p>
@@ -1297,7 +1297,10 @@ button {
                     <tr><td><code>:focus</code></td><td>Элемент выбран (мигает курсор в поле)</td></tr>
                     <tr><td><code>:visited</code></td><td>Ссылка, по которой уже переходили</td></tr>
                     <tr><td><code>:first-child</code></td><td>Первый ребёнок у родителя</td></tr>
-                    <tr><td><code>:last-child</code></td><td>Последний ребёнок</td></tr>
+                    <tr><td><code>:last-child</code></td><td>Последний ребёнок у родителя</td></tr>
+                    <tr><td><code>:nth-last-child(2)</code></td><td>Второй с конца. Считает не с начала, а с конца</td></tr>
+                    <tr><td><code>:first-of-type</code></td><td>Первый элемент такого тега, например первый <code>&lt;p&gt;</code> среди других тегов</td></tr>
+                    <tr><td><code>:last-of-type</code></td><td>Последний элемент такого тега</td></tr>
                     <tr><td><code>:nth-child(3)</code></td><td>Третий по счёту. <code>odd</code> — нечётные, <code>even</code> — чётные, <code>3n</code> — каждый третий</td></tr>
                     <tr><td><code>:checked</code></td><td>Отмеченная галочка или радиокнопка</td></tr>
                 </tbody>
@@ -1315,6 +1318,7 @@ button {
                                 <button type="button" data-v=":nth-child(odd)">:nth-child(odd)</button>
                                 <button type="button" data-v=":nth-child(even)">:nth-child(even)</button>
                                 <button type="button" data-v=":nth-child(3n)">:nth-child(3n)</button>
+                                <button type="button" data-v=":nth-last-child(2)">:nth-last-child(2)</button>
                                 <button type="button" data-v=":not(:first-child)">:not(:first-child)</button>
                             </div>
                         </div>
@@ -1365,6 +1369,7 @@ button {
                     <tr><td><code>::placeholder</code></td><td>Серая подсказка в пустом поле</td></tr>
                 </tbody>
             </table>
+            <div class="tip">🤔 <b>А последнюю букву или строчку можно?</b> Нет: псевдоэлементов <code>::last-letter</code> и <code>::last-line</code> в CSS не существует, браузеры так не умеют. Зато <b>последний элемент</b> — последний пункт списка, последнюю клеточку в строке таблицы, последний абзац — выбрать можно. Это делают псевдоклассы: <code>:last-child</code> (последний), <code>:nth-last-child(2)</code> (второй с конца), <code>:last-of-type</code> (последний такого тега). Подробнее — в разделе <a href="#pclass">«Псевдоклассы»</a>.</div>
             <div class="warn">⚠️ У <code>::before</code> и <code>::after</code> обязательно должно быть свойство <code>content</code>. Без него они не появятся. Если текст не нужен, пишут пустые кавычки: <code>content: "";</code></div>
 
             <div class="lab" id="lab-pe">

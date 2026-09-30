@@ -236,6 +236,9 @@
         ":first-child": ["", "первый ребёнок"],
         ":last-child": ["", "последний ребёнок"],
         ":nth-child": ["", "n-й ребёнок"],
+        ":nth-last-child": ["", "n-й ребёнок с конца"],
+        ":first-of-type": ["", "первый такого типа", "первый элемент с таким тегом"],
+        ":last-of-type": ["", "последний такого типа", "последний элемент с таким тегом"],
         "odd": ["", "нечётный"],
         "even": ["", "чётный"],
         ":checked": ["", "отмеченный"],
@@ -787,7 +790,7 @@
                 sel = ":nth-child(" + custom + ")";
                 root.querySelectorAll(".chips button").forEach(function (b) { b.classList.remove("on"); });
             }
-            style.textContent = ".nth-list li" + sel + "{background:#8a4ff0;color:#fff;transform:translateX(6px)}";
+            style.textContent = ".nth-list li" + sel + "{background:#8a4ff0;color:#fff;box-shadow:0 0 0 3px rgba(138,79,240,.35)}";
             root.querySelectorAll(".nth-list li").forEach(function (li, i) { li.textContent = "Пункт " + (i + 1); });
             showCode(root, cssRule("li" + sel, { "background-color": "violet", "color": "white" }));
         });
