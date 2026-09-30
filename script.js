@@ -23,6 +23,310 @@
         return lines.map(function (l) { return l.slice(min); }).join("\n");
     }
 
+    /* ---------- СЛОВАРЬ ----------
+       Здесь все слова HTML и CSS с полным английским названием и переводом.
+       Формат: "слово": ["полное название по-английски", "перевод", "пояснение (можно не писать)"].
+       Если полное название совпадает с самим словом, первое поле пустое: "".
+       Добавить слово или поправить перевод — это одна строчка здесь. */
+    var DICT = {
+        /* язык */
+        "HTML": ["HyperText Markup Language", "язык гипертекстовой разметки"],
+        "CSS": ["Cascading Style Sheets", "каскадные таблицы стилей"],
+
+        /* каркас страницы */
+        "!DOCTYPE": ["document type", "тип документа", "говорит браузеру: это страница HTML"],
+        "html": ["HyperText Markup Language", "язык гипертекстовой разметки", "тег-коробка для всей страницы"],
+        "head": ["", "голова", "служебная часть страницы, на сайте её не видно"],
+        "body": ["", "тело", "всё, что видно на странице"],
+        "header": ["", "шапка, верхняя часть"],
+        "main": ["", "главный, основной"],
+        "footer": ["", "подвал, нижняя часть", "от foot — нога, низ"],
+        "title": ["", "название, заглавие", "текст на вкладке браузера"],
+        "meta": ["metadata", "метаданные — сведения о странице"],
+        "charset": ["character set", "набор символов"],
+        "viewport": ["", "окно просмотра", "view — вид, port — окошко"],
+        "link": ["", "связь, ссылка"],
+        "rel": ["relationship", "отношение, связь", "кем подключённый файл приходится странице"],
+        "stylesheet": ["style sheet", "лист стилей"],
+        "lang": ["language", "язык"],
+        "UTF-8": ["Unicode Transformation Format", "формат Юникода", "способ записать буквы всех языков мира"],
+
+        /* текст, картинки, ссылки */
+        "h1": ["heading 1", "заголовок 1-го уровня", "самый крупный; бывают до h6"],
+        "h2": ["heading 2", "заголовок 2-го уровня"],
+        "h3": ["heading 3", "заголовок 3-го уровня"],
+        "h6": ["heading 6", "заголовок 6-го уровня", "самый мелкий"],
+        "p": ["paragraph", "абзац"],
+        "b": ["bold", "жирный"],
+        "i": ["italic", "курсив"],
+        "u": ["underline", "подчёркнутый"],
+        "br": ["line break", "разрыв строки", "перенос на новую строку"],
+        "img": ["image", "изображение, картинка"],
+        "src": ["source", "источник", "откуда взять картинку или видео"],
+        "alt": ["alternative text", "запасной текст", "виден, если картинка не загрузилась"],
+        "a": ["anchor", "якорь", "тег ссылки"],
+        "href": ["hypertext reference", "гипертекстовая ссылка", "куда ведёт ссылка"],
+        "id": ["identifier", "идентификатор", "уникальное имя элемента"],
+        "target": ["", "цель", "где открыть ссылку"],
+        "_blank": ["blank", "пустой", "открыть в новой, пустой вкладке"],
+        "width": ["", "ширина"],
+        "height": ["", "высота"],
+
+        /* картинки */
+        "jpg": ["Joint Photographic Experts Group", "объединённая группа экспертов по фотографии", "формат для фотографий"],
+        "png": ["Portable Network Graphics", "переносимая сетевая графика"],
+        "gif": ["Graphics Interchange Format", "формат обмена картинками"],
+        "svg": ["Scalable Vector Graphics", "масштабируемая векторная графика"],
+        "webp": ["web picture", "картинка для интернета"],
+        "img/": ["image folder", "папка с картинками"],
+
+        /* таблицы */
+        "table": ["", "таблица"],
+        "tr": ["table row", "строка таблицы"],
+        "td": ["table data", "данные таблицы — обычная клеточка"],
+        "th": ["table header", "заголовок таблицы — клеточка-заголовок"],
+        "colspan": ["column span", "охват столбцов"],
+        "rowspan": ["row span", "охват строк"],
+        "border-collapse": ["", "схлопывание рамок", "collapse — схлопнуть"],
+
+        /* списки */
+        "ul": ["unordered list", "неупорядоченный список"],
+        "ol": ["ordered list", "упорядоченный список"],
+        "li": ["list item", "элемент (пункт) списка"],
+
+        /* формы */
+        "form": ["", "форма, бланк"],
+        "input": ["", "ввод", "поле, куда что-то вводят"],
+        "type": ["", "тип"],
+        "text": ["", "текст"],
+        "email": ["electronic mail", "электронная почта"],
+        "radio": ["radio button", "радиокнопка", "как кнопки старого радиоприёмника: нажата только одна"],
+        "checkbox": ["check box", "квадратик для отметки", "check — отметить, box — коробочка"],
+        "textarea": ["text area", "текстовая область"],
+        "select": ["", "выбрать"],
+        "option": ["", "вариант"],
+        "button": ["", "кнопка"],
+        "label": ["", "ярлык, подпись"],
+        "for": ["", "для", "для какого поля эта подпись"],
+        "placeholder": ["", "заполнитель", "серая подсказка, пока поле пустое"],
+        "name": ["", "имя"],
+        "value": ["", "значение"],
+        "rows": ["", "строки"],
+        "action": ["", "действие", "куда отправить данные формы"],
+        "method": ["", "способ", "как отправить данные"],
+        "POST": ["", "отправить почтой", "данные идут «в конверте», их не видно в адресной строке"],
+        "submit": ["", "отправить"],
+        "novalidate": ["no validate", "не проверять"],
+
+        /* разметка: контейнеры */
+        "div": ["division", "раздел, деление", "главная «коробка» для других элементов"],
+        "span": ["", "промежуток, охват", "строчная коробка для кусочка текста"],
+        "class": ["", "класс, группа"],
+        "nav": ["navigation", "навигация, меню"],
+        "section": ["", "раздел"],
+        "article": ["", "статья"],
+        "aside": ["", "в стороне, сбоку"],
+        "display": ["", "отображение, показ"],
+        "block": ["", "блок"],
+        "inline": ["", "в строке"],
+        "inline-block": ["", "блок в строке"],
+        "none": ["", "ничего, нет"],
+        "grid": ["", "сетка"],
+
+        /* flexbox */
+        "flex": ["flexible box", "гибкая коробка"],
+        "flex-direction": ["", "направление", "direction — направление"],
+        "row": ["", "ряд"],
+        "column": ["", "колонка, столбик"],
+        "row-reverse": ["", "ряд наоборот"],
+        "column-reverse": ["", "столбик наоборот"],
+        "justify-content": ["", "выровнять содержимое", "justify — выровнять, content — содержимое"],
+        "align-items": ["", "выровнять элементы", "align — выровнять, items — элементы"],
+        "flex-wrap": ["", "перенос", "wrap — заворачивать"],
+        "wrap": ["", "переносить, заворачивать"],
+        "nowrap": ["no wrap", "без переноса"],
+        "gap": ["", "промежуток, щель"],
+        "flex-grow": ["", "расти"],
+        "flex-shrink": ["", "сжиматься"],
+        "flex-basis": ["", "основа, исходный размер"],
+        "order": ["", "порядок"],
+        "flex-start": ["", "начало"],
+        "flex-end": ["", "конец"],
+        "center": ["", "центр"],
+        "space-between": ["", "место между"],
+        "space-around": ["", "место вокруг"],
+        "space-evenly": ["", "место поровну"],
+        "stretch": ["", "растянуть"],
+        "align-self": ["", "выровнять себя"],
+
+        /* позиционирование */
+        "position": ["", "позиция, положение"],
+        "static": ["", "неподвижный, обычный"],
+        "relative": ["", "относительный"],
+        "absolute": ["", "абсолютный"],
+        "fixed": ["", "закреплённый"],
+        "sticky": ["", "липкий"],
+        "top": ["", "верх"],
+        "bottom": ["", "низ"],
+        "left": ["", "лево, слева"],
+        "right": ["", "право, справа"],
+        "z-index": ["", "номер слоя", "ось Z идёт «в глубину» экрана: у кого больше — тот сверху"],
+
+        /* правило CSS */
+        "selector": ["", "селектор — «выбиратель»", "от select — выбрать"],
+        "property": ["", "свойство"],
+        ".class": ["class selector", "селектор класса", "точка = класс"],
+        "#id": ["id selector", "селектор по id", "решётка = id"],
+
+        /* цвет, шрифт, текст */
+        "color": ["", "цвет"],
+        "background-color": ["", "цвет фона", "background — задний план, фон"],
+        "font-family": ["", "семейство шрифтов", "font — шрифт"],
+        "font-size": ["", "размер шрифта"],
+        "font-weight": ["", "вес (толщина) шрифта"],
+        "font-style": ["", "начертание шрифта"],
+        "text-align": ["", "выравнивание текста"],
+        "text-decoration": ["", "украшение текста", "линии: подчёркивание, зачёркивание"],
+        "line-height": ["", "высота строки"],
+        "bold": ["", "жирный"],
+        "italic": ["", "курсив"],
+        "underline": ["", "подчёркивание"],
+        "justify": ["", "выровнять по ширине"],
+        "rgb": ["red, green, blue", "красный, зелёный, синий"],
+        "rgba": ["red, green, blue, alpha", "красный, зелёный, синий и прозрачность"],
+
+        /* рамки и отступы */
+        "border": ["", "граница, рамка"],
+        "border-radius": ["", "радиус рамки", "скругление углов"],
+        "border-top": ["", "рамка сверху"],
+        "solid": ["", "сплошной"],
+        "dashed": ["", "штриховой", "dash — чёрточка"],
+        "dotted": ["", "точечный", "dot — точка"],
+        "double": ["", "двойной"],
+        "groove": ["", "канавка, желобок"],
+        "ridge": ["", "гребень"],
+        "inset": ["", "вдавленный, внутрь"],
+        "outset": ["", "выпуклый, наружу"],
+        "px": ["pixel", "пиксель", "picture element — точка на экране"],
+        "padding": ["", "внутренний отступ", "дословно — набивка, мягкая прокладка"],
+        "margin": ["", "внешний отступ", "дословно — поле, край"],
+        "auto": ["automatic", "автоматически"],
+
+        /* маркеры списков */
+        "list-style-type": ["", "тип маркера списка"],
+        "list-style-image": ["", "картинка-маркер списка"],
+        "list-style-position": ["", "положение маркера"],
+        "disc": ["", "диск, закрашенный кружок"],
+        "circle": ["", "круг, окружность"],
+        "square": ["", "квадрат"],
+        "decimal": ["", "десятичный — цифры 1, 2, 3"],
+        "upper-roman": ["", "заглавные римские цифры"],
+        "lower-alpha": ["", "строчные латинские буквы", "alpha — альфа, первая буква"],
+        "inside": ["", "внутри"],
+        "outside": ["", "снаружи"],
+        "url": ["Uniform Resource Locator", "адрес в интернете или путь к файлу"],
+
+        /* псевдоклассы */
+        "pseudo-class": ["", "псевдокласс", "pseudo — ненастоящий: это не класс, а состояние"],
+        ":hover": ["", "навести, зависнуть над", "мышка над элементом"],
+        ":active": ["", "активный", "в момент нажатия"],
+        ":focus": ["", "фокус", "элемент выбран, в поле мигает курсор"],
+        ":visited": ["", "посещённый"],
+        ":link": ["", "ссылка, ещё не посещённая"],
+        ":first-child": ["", "первый ребёнок"],
+        ":last-child": ["", "последний ребёнок"],
+        ":nth-child": ["", "n-й ребёнок"],
+        "odd": ["", "нечётный"],
+        "even": ["", "чётный"],
+        ":checked": ["", "отмеченный"],
+        ":not": ["", "не", "все, кроме"],
+        "transition": ["", "переход", "плавное изменение"],
+
+        /* псевдоэлементы */
+        "pseudo-element": ["", "псевдоэлемент", "ненастоящий элемент: его нет в HTML"],
+        "::before": ["", "перед"],
+        "::after": ["", "после"],
+        "::first-letter": ["", "первая буква"],
+        "::first-line": ["", "первая строка"],
+        "::selection": ["", "выделение"],
+        "::placeholder": ["", "заполнитель, подсказка в пустом поле"],
+        "::marker": ["", "маркер пункта списка"],
+        "content": ["", "содержимое"],
+
+        /* градиенты и тени */
+        "gradient": ["", "градиент — плавный переход цветов"],
+        "linear-gradient": ["", "линейный градиент"],
+        "radial-gradient": ["", "радиальный градиент", "от радиуса: из центра во все стороны"],
+        "conic-gradient": ["", "конический градиент", "cone — конус: цвета идут по кругу"],
+        "repeating-linear-gradient": ["", "повторяющийся линейный градиент"],
+        "repeating-radial-gradient": ["", "повторяющийся радиальный градиент"],
+        "background-image": ["", "фоновая картинка"],
+        "background": ["", "фон"],
+        "background-size": ["", "размер фона"],
+        "cover": ["", "покрыть целиком"],
+        "deg": ["degree", "градус"],
+        "to": ["", "к, в сторону"],
+        "at": ["", "в точке"],
+        "ellipse": ["", "эллипс, овал"],
+        "box-shadow": ["", "тень блока", "box — коробка, shadow — тень"],
+
+        /* трансформации */
+        "transform": ["", "преобразовать"],
+        "translate": ["", "переместить", "дословно — перевести на другое место"],
+        "rotate": ["", "повернуть"],
+        "scale": ["", "масштаб"],
+        "skew": ["", "перекосить, наклонить"],
+        "transform-origin": ["", "точка преобразования", "origin — начало, исходная точка"],
+
+        /* видео и аудио */
+        "video": ["", "видео"],
+        "audio": ["", "звук"],
+        "controls": ["", "управление", "кнопки плеера"],
+        "autoplay": ["automatic play", "автозапуск"],
+        "muted": ["", "без звука", "mute — немой"],
+        "loop": ["", "петля — повтор по кругу"],
+        "poster": ["", "постер, обложка"],
+        "iframe": ["inline frame", "встроенная рамка", "окошко с другой страницей внутри твоей"],
+        "embed": ["", "встроить"],
+        "allowfullscreen": ["allow full screen", "разрешить полный экран"],
+
+        /* GitHub и публикация */
+        "GitHub": ["", "Git — программа для хранения версий кода, hub — центр"],
+        "repository": ["", "репозиторий — хранилище", "папка проекта на GitHub"],
+        "New repository": ["", "новый репозиторий"],
+        "Public": ["", "публичный, открытый для всех"],
+        "Create repository": ["", "создать репозиторий"],
+        "Upload files": ["", "загрузить файлы"],
+        "Add file": ["", "добавить файл"],
+        "Commit changes": ["", "зафиксировать изменения", "сохранить загрузку в репозитории"],
+        "Settings": ["", "настройки"],
+        "Pages": ["", "страницы", "сервис GitHub, который показывает сайт в интернете"],
+        "Deploy from a branch": ["", "развернуть из ветки", "опубликовать сайт из файлов репозитория"],
+        "Branch": ["", "ветка", "версия файлов в репозитории; основная называется main"],
+        "root": ["", "корень", "самый верхний уровень репозитория"],
+        "Save": ["", "сохранить"],
+        "claim": ["", "забрать, заявить права"],
+        "Dashboard": ["", "панель управления"],
+        "Create my site": ["", "создать мой сайт"]
+    };
+
+    function dictEntry(key) {
+        return Object.prototype.hasOwnProperty.call(DICT, key) ? DICT[key] : null;
+    }
+    // текст подсказки: «unordered list — неупорядоченный список»
+    function dictTip(key) {
+        var e = dictEntry(key);
+        if (!e) return "";
+        var t = (e[0] ? e[0] + " — " : "") + e[1];
+        if (e[2]) t += " (" + e[2] + ")";
+        return t;
+    }
+    // как слово показывается: теги — в уголках
+    var TAG_WORDS = "!DOCTYPE html head body header main footer title meta link h1 h2 h3 h6 p b i u br img a table tr td th ul ol li form input textarea select option button label div span nav section article aside video audio iframe".split(" ");
+    function dictLabel(key) {
+        return TAG_WORDS.indexOf(key) !== -1 ? "<" + key + ">" : key;
+    }
+
     // превращает текст в HTML с цветными кусочками
     function tokenize(raw, re, pick) {
         var out = "", last = 0, m;
@@ -36,15 +340,23 @@
         return out + esc(raw.slice(last));
     }
     function span(cls, text) { return '<span class="' + cls + '">' + esc(text) + "</span>"; }
+    // кусочек кода с подсказкой-переводом, если слово есть в словаре
+    function tipSpan(cls, text, key) {
+        var tip = dictTip(key);
+        if (!tip) return span(cls, text);
+        return '<span class="' + cls + ' has-tip" tabindex="0" data-tip="' + esc(dictLabel(key)) + " — " + esc(tip).replace(/"/g, "&quot;") + '">' + esc(text) + "</span>";
+    }
 
     function hlTag(tag) {
         return tokenize(tag, /("[^"]*")|(^<\/?!?[\w-]+)|([\w:-]+)(?==)/g, function (m) {
             if (m[1]) return span("t-str", m[1]);
             if (m[2]) {
                 var open = m[2].match(/^<\/?!?/)[0];
-                return esc(open) + span("t-tag", m[2].slice(open.length));
+                var name = m[2].slice(open.length);
+                var key = open.indexOf("!") !== -1 ? "!" + name : name.toLowerCase();
+                return esc(open) + tipSpan("t-tag", name, key);
             }
-            return span("t-attr", m[3]);
+            return tipSpan("t-attr", m[3], m[3]);
         });
     }
 
@@ -59,8 +371,8 @@
         return tokenize(code, cssRe, function (m) {
             if (m[1]) return span("t-com", m[1]);
             if (m[2]) return span("t-str", m[2]);
-            if (m[3]) return span("t-sel", m[3]);
-            if (m[4]) return span("t-prop", m[4]);
+            if (m[3]) return tipSpan("t-sel", m[3], m[3].trim());
+            if (m[4]) return tipSpan("t-prop", m[4], m[4]);
             if (m[5]) return span("t-hex", m[5]);
             return span("t-num", m[6]);
         });
@@ -654,8 +966,13 @@
         var svg = el("svg", { "aria-hidden": "true" }, stripe);
         var defs = el("defs", {}, svg);
         var grad = el("linearGradient", { id: "stripe-grad", gradientUnits: "userSpaceOnUse", x1: 0, y1: 0, x2: 1000, y2: 0 }, defs);
-        names.forEach(function (n, i) {
-            el("stop", { offset: i / (names.length - 1), "stop-color": css.getPropertyValue(n).trim() }, grad);
+        var stops = names.map(function (n, i) {
+            return el("stop", { offset: i / (names.length - 1), "stop-color": css.getPropertyValue(n).trim() }, grad);
+        });
+        // при смене темы берём цвета заново
+        document.addEventListener("themechange", function () {
+            var now = getComputedStyle(document.documentElement);
+            stops.forEach(function (s, i) { s.setAttribute("stop-color", now.getPropertyValue(names[i]).trim()); });
         });
         // мягкий край + чуть ярче и сочнее
         var filter = el("filter", { id: "stripe-soft", x: "-20%", y: "-50%", width: "140%", height: "200%" }, defs);
@@ -727,6 +1044,163 @@
     document.querySelectorAll("[data-copy]").forEach(function (btn) {
         btn.addEventListener("click", function () { copyText(btn.dataset.copy, btn); });
     });
+
+    /* ---------- Тёмная и светлая тема ----------
+       Выбор кнопкой запоминается в этом браузере. Пока ничего не выбрано —
+       тема такая же, как в настройках устройства. */
+    (function () {
+        var root = document.documentElement;
+        var btn = document.querySelector(".theme-btn");
+        if (!btn) return;
+        var icon = btn.querySelector(".theme-icon");
+        var label = btn.querySelector(".theme-label");
+        function saved() { try { return localStorage.getItem("theme"); } catch (e) { return null; } }
+        function paint() {
+            var dark = root.getAttribute("data-theme") === "dark";
+            icon.textContent = dark ? "☀️" : "🌙";
+            label.textContent = dark ? "Светлая тема" : "Тёмная тема";
+            btn.setAttribute("aria-pressed", dark);
+            btn.title = dark ? "Включить светлую тему" : "Включить тёмную тему";
+        }
+        btn.addEventListener("click", function () {
+            var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+            root.setAttribute("data-theme", next);
+            try { localStorage.setItem("theme", next); } catch (e) {}
+            paint();
+            document.dispatchEvent(new Event("themechange"));
+        });
+        if (window.matchMedia) {
+            var mq = matchMedia("(prefers-color-scheme: dark)");
+            var follow = function (e) {
+                if (saved()) return;           // человек сам выбрал тему — не трогаем
+                root.setAttribute("data-theme", e.matches ? "dark" : "light");
+                paint();
+                document.dispatchEvent(new Event("themechange"));
+            };
+            if (mq.addEventListener) mq.addEventListener("change", follow); else if (mq.addListener) mq.addListener(follow);
+        }
+        paint();
+    })();
+
+    /* ---------- Словарики, карточки и всплывающий перевод ---------- */
+    (function () {
+        function card(key) {
+            var e = dictEntry(key);
+            if (!e) { if (window.console) console.warn("Нет в словаре:", key); return ""; }
+            return '<div class="dict-item"><code>' + esc(dictLabel(key)) + "</code>" +
+                (e[0] ? '<span class="dict-en">' + esc(e[0]) + "</span>" : "") +
+                '<span class="dict-ru">' + esc(e[1]) + "</span>" +
+                (e[2] ? '<span class="dict-note">' + esc(e[2]) + "</span>" : "") + "</div>";
+        }
+        // словарик раздела: если слов много, часть прячем под кнопку
+        var SHOW = 9;
+        document.querySelectorAll(".dict[data-words]").forEach(function (box) {
+            var keys = box.dataset.words.split("|");
+            var html = '<p class="dict-title">📖 Словарик раздела <span>' + keys.length + " " + plural(keys.length) + "</span></p>";
+            html += '<div class="dict-grid">' + keys.map(card).join("") + "</div>";
+            if (keys.length > SHOW + 2) html += '<button type="button" class="dict-more">Показать все слова ↓</button>';
+            box.innerHTML = html;
+            if (keys.length > SHOW + 2) {
+                box.classList.add("folded");
+                box.querySelector(".dict-more").addEventListener("click", function (e) {
+                    var folded = box.classList.toggle("folded");
+                    e.currentTarget.textContent = folded ? "Показать все слова ↓" : "Свернуть ↑";
+                });
+            }
+        });
+        function plural(n) {
+            var a = n % 10, b = n % 100;
+            if (a === 1 && b !== 11) return "слово";
+            if (a >= 2 && a <= 4 && (b < 12 || b > 14)) return "слова";
+            return "слов";
+        }
+
+        // карточки-перевёртыши
+        document.querySelectorAll(".flip-grid[data-words]").forEach(function (grid) {
+            grid.innerHTML = grid.dataset.words.split("|").map(function (key) {
+                var e = dictEntry(key);
+                if (!e) return "";
+                return '<button type="button" class="flip" aria-pressed="false"><span class="flip-in">' +
+                    '<span class="flip-front"><code>' + esc(dictLabel(key)) + "</code><small>нажми, чтобы перевернуть</small></span>" +
+                    '<span class="flip-back"><b>' + esc(e[0] || key) + "</b>" + esc(e[1]) + "</span></span></button>";
+            }).join("");
+            grid.addEventListener("click", function (ev) {
+                var f = ev.target.closest(".flip");
+                if (!f) return;
+                var on = f.classList.toggle("flipped");
+                f.setAttribute("aria-pressed", on);
+            });
+        });
+
+        // перевод у слов в тексте: <code>&lt;ul&gt;</code>, <code>href</code>, <code>:hover</code>…
+        function keyOf(text) {
+            var t = text.trim();
+            var m = t.match(/^<\/?(!?[A-Za-z][\w-]*)(\s[^>]*)?>$/);
+            if (m) {
+                var tag = m[1].charAt(0) === "!" ? "!" + m[1].slice(1).toUpperCase() : m[1].toLowerCase();
+                return dictEntry(tag) ? tag : null;
+            }
+            t = t.replace(/[;:]$/, "");
+            if (dictEntry(t)) return t;
+            var bare = t.replace(/\(.*\)$/, "");         // :nth-child(3) → :nth-child
+            if (dictEntry(bare)) return bare;
+            return null;
+        }
+        document.querySelectorAll("main :not(pre) > code").forEach(function (c) {
+            if (c.closest(".dict-item, .flip, .has-tip")) return;
+            var key = keyOf(c.textContent);
+            if (!key) return;
+            c.classList.add("has-tip");
+            c.setAttribute("tabindex", "0");
+            c.setAttribute("data-tip", dictLabel(key) + " — " + dictTip(key));
+        });
+
+        // всплывающая подсказка: наведение мышкой или нажатие пальцем
+        var pop = document.createElement("div");
+        pop.className = "tip-pop";
+        pop.setAttribute("role", "tooltip");
+        document.body.appendChild(pop);
+        var current = null, shownAt = 0;
+        function show(el) {
+            if (current !== el) shownAt = Date.now();
+            current = el;
+            pop.textContent = el.getAttribute("data-tip");
+            pop.classList.add("on");
+            var r = el.getBoundingClientRect();
+            var w = pop.offsetWidth, h = pop.offsetHeight;
+            var x = Math.min(window.innerWidth - w - 8, Math.max(8, r.left + r.width / 2 - w / 2));
+            var y = r.top - h - 8;
+            if (y < 8) y = r.bottom + 8;
+            pop.style.left = x + "px";
+            pop.style.top = y + "px";
+        }
+        function hide() { current = null; pop.classList.remove("on"); }
+        var lastPointer = "mouse";
+        document.addEventListener("pointerdown", function (e) { lastPointer = e.pointerType || "mouse"; }, true);
+        document.addEventListener("mouseover", function (e) {
+            if (lastPointer !== "mouse") return;   // на телефоне подсказкой управляет касание
+            var el = e.target.closest && e.target.closest("[data-tip]");
+            if (el) show(el); else if (current) hide();
+        });
+        document.addEventListener("focusin", function (e) {
+            var el = e.target.closest && e.target.closest("[data-tip]");
+            if (el) show(el);
+        });
+        document.addEventListener("click", function (e) {
+            var el = e.target.closest && e.target.closest("[data-tip]");
+            // второе нажатие на то же слово прячет подсказку; первое (оно же фокус) — показывает
+            if (el) { if (current === el && Date.now() - shownAt > 500) hide(); else show(el); }
+            else hide();
+        });
+        // прячем подсказку, только если страницу заметно прокрутили
+        var shownY = 0;
+        var origShow = show;
+        show = function (el) { shownY = window.pageYOffset; origShow(el); };
+        window.addEventListener("scroll", function () {
+            if (current && Math.abs(window.pageYOffset - shownY) > 40) hide();
+        }, { passive: true });
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape") hide(); });
+    })();
 
     /* ---------- 6. Оглавление ---------- */
     (function () {

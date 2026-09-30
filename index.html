@@ -7,6 +7,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Тема: сразу ставим тёмную или светлую, чтобы страница не «мигала» -->
+    <script>
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem("theme"); } catch (e) {}
+            if (t !== "dark" && t !== "light") {
+                t = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            }
+            document.documentElement.setAttribute("data-theme", t);
+        })();
+    </script>
     <!-- Вот так подключается CSS-файл: -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,7 +31,10 @@
             <h1>Шпаргалка юного веб-мастера</h1>
             <p class="top-lead">HTML и CSS с примерами, которые можно потрогать: двигай ползунки, меняй код и сразу смотри результат.</p>
         </div>
-        <p class="top-author">@3efirnaya</p>
+        <div class="top-side">
+            <p class="top-author">@3efirnaya</p>
+            <button type="button" class="theme-btn" aria-pressed="false"><span class="theme-icon" aria-hidden="true">🌙</span><span class="theme-label">Тёмная тема</span></button>
+        </div>
     </div>
 </header>
 
@@ -31,6 +45,7 @@
         <button class="toc-toggle" type="button" aria-expanded="false">☰ Оглавление</button>
         <div class="toc-body">
             <p class="toc-group">Начало</p>
+            <a href="#intro">Что такое HTML и CSS</a>
             <a href="#links">Полезные сайты</a>
 
             <p class="toc-group k-prep">Подготовка</p>
@@ -71,6 +86,49 @@
     </nav>
 
     <main class="content">
+
+        <!-- ===== ЧТО ТАКОЕ HTML И CSS ===== -->
+        <section id="intro" class="sec k-pub">
+            <div class="sec-head"><span class="badge">Начало</span><h2>Что такое HTML и CSS</h2></div>
+            <p class="lead">Любой сайт — это обычные текстовые файлы. Браузер читает их и превращает в красивую страницу. Для этого есть два языка: <b>HTML</b> говорит, <b>что</b> есть на странице, а <b>CSS</b> — <b>как</b> это выглядит.</p>
+
+            <h3>HTML — язык гипертекстовой разметки</h3>
+            <div class="acro">
+                <div class="acro-part"><span class="acro-letter">H</span><span class="acro-word">Hyper</span><span class="acro-ru">гипер-, сверх-</span></div>
+                <div class="acro-part"><span class="acro-letter">T</span><span class="acro-word">Text</span><span class="acro-ru">текст</span></div>
+                <div class="acro-part"><span class="acro-letter">M</span><span class="acro-word">Markup</span><span class="acro-ru">разметка</span></div>
+                <div class="acro-part"><span class="acro-letter">L</span><span class="acro-word">Language</span><span class="acro-ru">язык</span></div>
+            </div>
+            <ul class="acro-notes">
+                <li><b>Гипертекст</b> — это текст со ссылками, по которым можно «прыгать» с места на место и с сайта на сайт. Обычная книга читается по порядку, а гипертекст — как захочешь.</li>
+                <li><b>Разметка</b> — это пометки, которые объясняют браузеру, что где: «это заголовок», «это абзац», «это картинка». Как учитель, который подчёркивает и подписывает части текста на полях. Такие пометки называются <b>теги</b>.</li>
+            </ul>
+
+            <h3>CSS — каскадные таблицы стилей</h3>
+            <div class="acro css-acro">
+                <div class="acro-part"><span class="acro-letter">C</span><span class="acro-word">Cascading</span><span class="acro-ru">каскадные</span></div>
+                <div class="acro-part"><span class="acro-letter">S</span><span class="acro-word">Style</span><span class="acro-ru">стилей</span></div>
+                <div class="acro-part"><span class="acro-letter">S</span><span class="acro-word">Sheets</span><span class="acro-ru">таблицы, листы</span></div>
+            </div>
+            <ul class="acro-notes">
+                <li><b>Стиль</b> — это внешний вид: цвет, шрифт, размер, рамки, расположение.</li>
+                <li><b>Каскад</b> — это водопад, который падает ступеньками. Стили тоже «стекают» сверху вниз: от коробки — ко всему, что внутри неё. А если для одного элемента написано несколько правил, побеждает более точное или то, что написано ниже.</li>
+            </ul>
+
+            <div class="two-col">
+                <div class="mini-card file-card"><h3>📄 HTML — скелет</h3><p>Из чего сделана страница: заголовки, текст, картинки, ссылки, таблицы.</p></div>
+                <div class="mini-card file-card css-file"><h3>🎨 CSS — одежда</h3><p>Как всё выглядит: цвета, шрифты, рамки, где что стоит на странице.</p></div>
+            </div>
+
+            <h3>Код — это английские слова</h3>
+            <p>Весь HTML и CSS построен на английских словах и их сокращениях. <code>&lt;p&gt;</code> — это <i>paragraph</i>, абзац. <code>&lt;img&gt;</code> — <i>image</i>, картинка. <code>color</code> — цвет. Знаешь слова — понимаешь код, и его не нужно зубрить: достаточно помнить перевод.</p>
+            <p>Поэтому на этом сайте в каждом разделе есть <b>📖 словарик</b> с полным названием и переводом всех слов. А слова в коде, подчёркнутые пунктиром, можно навести мышкой или нажать пальцем — появится перевод.</p>
+
+            <div class="lab">
+                <p class="lab-title">🃏 Попробуй сам: угадай, что значит слово, и переверни карточку</p>
+                <div class="flip-grid" data-words="p|img|a|ul|li|br|h1|div"></div>
+            </div>
+        </section>
 
         <!-- ===== ПОЛЕЗНЫЕ САЙТЫ ===== -->
         <section id="links" class="sec k-pub">
@@ -198,6 +256,7 @@
         <section id="images" class="sec k-prep">
             <div class="sec-head"><span class="badge">Подготовка</span><h2>Картинки: храним у себя</h2></div>
             <p class="lead">Картинку можно вставить двумя способами: <b>ссылкой</b> на чужой сайт или <b>своей копией</b>, которая лежит в папке сайта. Надёжнее — своя копия.</p>
+            <div class="dict" data-words="img|src|alt|width|jpg|png|gif|svg|webp"></div>
 
             <div class="two-col">
                 <div class="mini-card bad-card">
@@ -302,6 +361,7 @@
         <section id="structure" class="sec k-html">
             <div class="sec-head"><span class="badge">HTML</span><h2>Каркас страницы</h2></div>
             <p class="lead">HTML — это <b>теги</b> в угловых скобках. Почти у каждого тега есть открывающая и закрывающая часть: <code>&lt;p&gt;</code> … <code>&lt;/p&gt;</code>. Между ними — содержимое.</p>
+            <div class="dict" data-words="!DOCTYPE|html|lang|head|meta|charset|UTF-8|viewport|name|content|title|link|rel|stylesheet|href|body|header|main|footer"></div>
             <p>Страница похожа на письмо: сверху <b>шапка</b>, в середине <b>основной текст</b>, внизу <b>подвал</b> с контактами. Нажми на часть страницы, чтобы узнать, что в ней лежит.</p>
 
             <div class="lab" id="lab-skeleton">
@@ -447,6 +507,7 @@ footer {
         <!-- ===== ТЕКСТ, КАРТИНКИ, ССЫЛКИ ===== -->
         <section id="text" class="sec k-html">
             <div class="sec-head"><span class="badge">HTML</span><h2>Текст, картинки и ссылки</h2></div>
+            <div class="dict" data-words="h1|h6|p|b|i|u|br|img|src|alt|width|a|href|id|target|_blank"></div>
 
             <table class="ref">
                 <thead><tr><th>Тег</th><th>Что делает</th></tr></thead>
@@ -499,6 +560,7 @@ footer {
         <section id="tables" class="sec k-html">
             <div class="sec-head"><span class="badge">HTML</span><h2>Таблицы</h2></div>
             <p class="lead">Таблица строится <b>по строчкам</b>. Каждый новый <code>&lt;tr&gt;</code> — новая строчка, каждый <code>&lt;td&gt;</code> внутри неё — клеточка.</p>
+            <div class="dict" data-words="table|tr|td|th|colspan|rowspan|border-collapse"></div>
 
             <div class="table-anatomy">
                 <div class="ta-row"><span class="ta-tag">&lt;tr&gt;</span><span class="ta-cell th">&lt;th&gt; Имя</span><span class="ta-cell th">&lt;th&gt; Класс</span><span class="ta-cell th">&lt;th&gt; Любимый предмет</span></div>
@@ -563,6 +625,7 @@ th {
         <!-- ===== СПИСКИ ===== -->
         <section id="lists" class="sec k-html">
             <div class="sec-head"><span class="badge">HTML</span><h2>Списки</h2></div>
+            <div class="dict" data-words="ul|ol|li"></div>
             <div class="two-col">
                 <div class="mini-card">
                     <h3>Неупорядоченный <code>&lt;ul&gt;</code></h3>
@@ -625,6 +688,7 @@ th {
         <section id="forms" class="sec k-html">
             <div class="sec-head"><span class="badge">HTML</span><h2>Формы обратной связи</h2></div>
             <p class="lead">Форма — это поля, куда посетитель что-то пишет или выбирает. Вся форма лежит внутри <code>&lt;form&gt;</code>.</p>
+            <div class="dict" data-words="form|label|for|input|type|text|email|textarea|rows|radio|checkbox|select|option|button|submit|name|value|placeholder|action|method|POST"></div>
             <table class="ref">
                 <thead><tr><th>Тег</th><th>Что это</th><th>Как выглядит</th></tr></thead>
                 <tbody>
@@ -756,6 +820,7 @@ button {
             <div class="sec-head"><span class="badge">Разметка</span><h2>Контейнеры</h2></div>
             <div class="tip">💡 В этом блоке встретятся первые свойства CSS: <code>display</code>, <code>flex</code>, <code>position</code>. Их пишут в файле <code>style.css</code>. Как подключить этот файл — в разделе <a href="#structure">«Каркас страницы»</a>, как устроено правило CSS — в разделе <a href="#cssrule">«Как писать CSS»</a>.</div>
             <p class="lead">Контейнер — это <b>коробка</b>, в которую складывают другие элементы, чтобы красить и двигать их вместе. Главная коробка — <code>&lt;div&gt;</code>. Ей дают класс и оформляют в CSS.</p>
+            <div class="dict" data-words="div|span|class|header|nav|main|section|article|aside|footer|display|block|inline|inline-block|none|width|height"></div>
             <script type="text/plain" class="code" data-lang="html">
                 <div class="card">
                     <h2>Мой кот</h2>
@@ -827,6 +892,7 @@ button {
         <section id="flex" class="sec k-lay">
             <div class="sec-head"><span class="badge">Разметка</span><h2>Flexbox</h2></div>
             <p class="lead">Flexbox — как <b>полка</b> для вещей. Пишешь <code>display: flex</code> <b>родителю</b>, и все его дети встают в ряд. Дальше можно двигать их по полке и выравнивать.</p>
+            <div class="dict" data-words="flex|display|flex-direction|row|column|row-reverse|column-reverse|justify-content|align-items|flex-start|center|flex-end|space-between|space-around|space-evenly|stretch|flex-wrap|wrap|nowrap|gap|flex-grow|flex-shrink|flex-basis|order|align-self"></div>
             <script type="text/plain" class="code" data-lang="html">
                 <div class="shelf">
                     <div>1</div>
@@ -910,6 +976,7 @@ button {
         <section id="position" class="sec k-lay">
             <div class="sec-head"><span class="badge">Разметка</span><h2>Виды позиционирования</h2></div>
             <p class="lead">Свойство <code>position</code> решает, <b>от чего</b> считать отступы <code>top</code>, <code>left</code>, <code>right</code>, <code>bottom</code>. Видов пять.</p>
+            <div class="dict" data-words="position|static|relative|absolute|fixed|sticky|top|left|right|bottom|z-index"></div>
             <table class="ref">
                 <thead><tr><th>Вид</th><th>Как себя ведёт</th><th>Для чего</th></tr></thead>
                 <tbody>
@@ -976,6 +1043,7 @@ button {
         <section id="cssrule" class="sec k-css">
             <div class="sec-head"><span class="badge">CSS</span><h2>Как писать CSS</h2></div>
             <p class="lead">HTML говорит, <b>что</b> есть на странице. CSS говорит, <b>как</b> это выглядит. Все стили пишем в файле <code>style.css</code>, который подключили в <code>&lt;head&gt;</code> (как это сделать — в разделе <a href="#structure">«Каркас страницы»</a>). Теги <code>&lt;style&gt;</code> в файле <code>style.css</code> не нужны.</p>
+            <div class="dict" data-words="selector|property|value|.class|#id"></div>
             <p>Каждое правило состоит из трёх частей:</p>
             <div class="rule-anatomy">
                 <span class="ra-part ra-sel">h1<small>селектор — кого красим</small></span>
@@ -1037,6 +1105,7 @@ button {
         <section id="textcss" class="sec k-css">
             <div class="sec-head"><span class="badge">CSS</span><h2>Цвет, шрифт и текст</h2></div>
             <p class="lead">Каждое свойство пишется так: <code>свойство: значение;</code> — обязательно с <b>двоеточием</b> и <b>точкой с запятой</b> в конце.</p>
+            <div class="dict" data-words="color|background-color|font-family|font-size|font-weight|font-style|text-align|text-decoration|line-height|bold|italic|underline|left|center|right|justify|rgb"></div>
 
             <table class="ref">
                 <thead><tr><th>Свойство</th><th>Что делает</th><th>Примеры</th></tr></thead>
@@ -1095,6 +1164,7 @@ button {
         <section id="borders" class="sec k-css">
             <div class="sec-head"><span class="badge">CSS</span><h2>Рамки (границы)</h2></div>
             <p class="lead">Рамка пишется тремя словами: <b>толщина, вид, цвет</b> — <code>border: 3px dashed red;</code></p>
+            <div class="dict" data-words="border|px|solid|dashed|dotted|double|groove|ridge|inset|outset|border-top|border-radius"></div>
             <table class="ref border-table">
                 <thead><tr><th>Вид</th><th>Что значит</th><th>Как выглядит</th></tr></thead>
                 <tbody>
@@ -1145,6 +1215,7 @@ button {
         <section id="spacing" class="sec k-css">
             <div class="sec-head"><span class="badge">CSS</span><h2>Отступы: padding и margin</h2></div>
             <p class="lead">Представь подарок в коробке. <b>padding</b> — это мягкая бумага <b>внутри</b> коробки, между рамкой и подарком. <b>margin</b> — расстояние <b>снаружи</b>, от коробки до соседних коробок.</p>
+            <div class="dict" data-words="padding|margin|auto|width"></div>
             <div class="lab" id="lab-spacing">
                 <p class="lab-title">🎛️ Попробуй сам: полоски — это margin, голубое — padding</p>
                 <div class="lab-grid">
@@ -1168,6 +1239,7 @@ button {
         <section id="markers" class="sec k-css">
             <div class="sec-head"><span class="badge">CSS</span><h2>Маркеры списков</h2></div>
             <p class="lead">Точки и цифры в списке можно поменять свойством <code>list-style-type</code>, а вместо маркера поставить картинку через <code>list-style-image</code>.</p>
+            <div class="dict" data-words="list-style-type|disc|circle|square|decimal|upper-roman|lower-alpha|none|list-style-image|url|list-style-position|inside|outside"></div>
             <div class="lab" id="lab-markers">
                 <p class="lab-title">🎛️ Попробуй сам: выбери маркер</p>
                 <div class="lab-grid">
@@ -1204,6 +1276,7 @@ button {
         <section id="pclass" class="sec k-fx">
             <div class="sec-head"><span class="badge">Эффекты</span><h2>Псевдоклассы</h2></div>
             <p class="lead">Псевдокласс — это стиль для <b>особого состояния</b> элемента: когда на него навели мышку, нажали или когда он первый в списке. Пишется через <b>одно двоеточие</b>: <code>button:hover</code>.</p>
+            <div class="dict" data-words="pseudo-class|:hover|:active|:focus|:visited|:link|:first-child|:last-child|:nth-child|odd|even|:checked|:not|transition"></div>
 
             <div class="lab" id="lab-states">
                 <p class="lab-title">🖱️ Попробуй сам: наведи, нажми, кликни в поле — в коде загорится правило, которое сейчас работает</p>
@@ -1280,6 +1353,7 @@ button {
         <section id="pelem" class="sec k-fx">
             <div class="sec-head"><span class="badge">Эффекты</span><h2>Псевдоэлементы</h2></div>
             <p class="lead">Псевдоэлемент красит <b>часть</b> элемента (первую букву, первую строку) или <b>добавляет</b> в него то, чего нет в HTML. Пишется через <b>два двоеточия</b>: <code>h2::before</code>.</p>
+            <div class="dict" data-words="pseudo-element|::before|::after|content|::first-letter|::first-line|::selection|::placeholder|::marker"></div>
             <table class="ref">
                 <thead><tr><th>Псевдоэлемент</th><th>Что делает</th></tr></thead>
                 <tbody>
@@ -1340,6 +1414,7 @@ button {
         <section id="gradients" class="sec k-fx">
             <div class="sec-head"><span class="badge">Эффекты</span><h2>Градиенты и тени</h2></div>
             <p class="lead">Градиент — это плавный переход одного цвета в другой. Для CSS градиент — это <b>картинка</b>, поэтому его пишут в <code>background-image</code> или в <code>background</code>, но <b>не</b> в <code>background-color</code>.</p>
+            <div class="dict" data-words="gradient|background-image|background|linear-gradient|radial-gradient|conic-gradient|repeating-linear-gradient|repeating-radial-gradient|to|deg|circle|ellipse|at|rgba|background-size|cover|box-shadow|inset"></div>
 
             <table class="ref fit">
                 <thead><tr><th>Вид</th><th>Как пишется</th><th>Как выглядит</th></tr></thead>
@@ -1462,6 +1537,7 @@ button {
         <section id="transforms" class="sec k-fx">
             <div class="sec-head"><span class="badge">Эффекты</span><h2>Двумерные трансформации</h2></div>
             <p class="lead">Свойство <code>transform</code> двигает, крутит, увеличивает и наклоняет элемент. Соседи при этом стоят на месте, как будто ничего не произошло.</p>
+            <div class="dict" data-words="transform|translate|rotate|scale|skew|transform-origin|transition"></div>
             <table class="ref">
                 <thead><tr><th>Функция</th><th>Что делает</th><th>Пример</th></tr></thead>
                 <tbody>
@@ -1512,6 +1588,7 @@ button {
         <section id="media" class="sec k-fx">
             <div class="sec-head"><span class="badge">Эффекты</span><h2>Видео и аудио на сайте</h2></div>
             <p class="lead">Свой файл вставляется тегом <code>&lt;video&gt;</code> или <code>&lt;audio&gt;</code>. Видео с YouTube, VK или Rutube — через <code>&lt;iframe&gt;</code>.</p>
+            <div class="dict" data-words="video|audio|src|controls|autoplay|muted|loop|poster|width|iframe|embed|allowfullscreen"></div>
 
             <div class="lab" id="lab-media">
                 <p class="lab-title">🎵 Попробуй сам: включай настройки и слушай — это настоящий плеер</p>
@@ -1570,6 +1647,7 @@ button {
         <section id="publish" class="sec k-pub">
             <div class="sec-head"><span class="badge">Готово!</span><h2>Публикация сайта на GitHub</h2></div>
             <p class="lead">GitHub Pages бесплатно покажет твой сайт всему интернету по адресу <code>https://твой-логин.github.io/название/</code>. Отмечай галочками, что уже сделано.</p>
+            <div class="dict" data-words="GitHub|repository|New repository|Public|Create repository|Add file|Upload files|Commit changes|Settings|Pages|Deploy from a branch|Branch|root|Save"></div>
             <div class="tip">👨‍👩‍👧 Регистрируйся на GitHub <b>вместе со взрослым</b>: по правилам сервиса свой аккаунт можно заводить с 13 лет.</div>
 
             <h3>Что куда загружаем</h3>
@@ -1639,6 +1717,7 @@ button {
         <section id="hosting" class="sec k-pub">
             <div class="sec-head"><span class="badge">На будущее</span><h2>Другие хостинги</h2></div>
             <p class="lead"><b>Хостинг</b> — это компьютер в интернете, который всё время включён и показывает твой сайт всем. GitHub Pages — не единственный. Вот ещё два бесплатных, куда подходят те же файлы <code>index.html</code> и <code>style.css</code>.</p>
+            <div class="dict" data-words="Create my site|Dashboard|claim"></div>
 
             <div class="host-cards">
                 <div class="host-card">
