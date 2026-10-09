@@ -280,6 +280,21 @@
         "scale": ["", "масштаб"],
         "skew": ["", "перекосить, наклонить"],
         "transform-origin": ["", "точка преобразования", "origin — начало, исходная точка"],
+        "translateX": ["translate по оси X", "переместить по горизонтали", "влево-вправо"],
+        "translateY": ["translate по оси Y", "переместить по вертикали", "вверх-вниз"],
+        "scaleX": ["scale по оси X", "масштаб по ширине"],
+        "scaleY": ["scale по оси Y", "масштаб по высоте"],
+        "skewX": ["skew по оси X", "наклонить вбок"],
+        "skewY": ["skew по оси Y", "наклонить вверх-вниз"],
+        "all": ["", "всё, все", "все свойства сразу"],
+        "ease": ["", "лёгкость, плавность", "плавный разгон и торможение"],
+        "linear": ["", "линейный", "ровно, с одной скоростью"],
+        "ease-in": ["", "плавный вход", "медленно начать"],
+        "ease-out": ["", "плавный выход", "плавно затормозить в конце"],
+        "ease-in-out": ["", "плавный вход и выход", "медленно начать и медленно закончить"],
+        "transition-duration": ["", "длительность перехода", "duration — продолжительность"],
+        "transition-delay": ["", "задержка перехода", "delay — задержка, пауза"],
+        "opacity": ["", "непрозрачность", "1 — видно полностью, 0 — невидимо"],
 
         /* видео и аудио */
         "video": ["", "видео"],
@@ -370,7 +385,7 @@
                 return hlTag(m[0]);
             });
         }
-        var cssRe = /(\/\*[\s\S]*?\*\/)|("[^"]*")|([^{}\n;]+?)(?=\s*\{)|([\w-]+)(?=\s*:[^:])|(#[0-9a-fA-F]{3,8}\b)|(-?\b\d+(?:\.\d+)?(?:px|%|deg|em|rem|s|vh|vw)?\b)/g;
+        var cssRe = /(\/\*[\s\S]*?\*\/)|("[^"]*")|([^{}\n;]+?)(?=\s*\{)|([\w-]+)(?=\s*:[^:])|(#[0-9a-fA-F]{3,8}\b)|(-?\b\d+(?:\.\d+)?(?:px|%|deg|em|rem|ms|s|vh|vw)?\b)/g;
         return tokenize(code, cssRe, function (m) {
             if (m[1]) return span("t-com", m[1]);
             if (m[2]) return span("t-str", m[2]);
@@ -471,19 +486,40 @@
     });
 
     /* ---------- 3. Мини-тесты ---------- */
+    // Пелмер комментирует ответы в тестах
+    var PELMER_OK = [
+        "Ух-ху! Верно!",
+        "Точно! Сова одобряет.",
+        "В яблочко! То есть в мышку.",
+        "Правильно! У меня перья дыбом от гордости.",
+        "Да! Ты соображаешь быстрее, чем я летаю."
+    ];
+    var PELMER_NO = [
+        "Ух… мимо. Попробуй ещё!",
+        "Не совсем. Даже совы иногда промахиваются.",
+        "Почти! Покрути головой, как я, и глянь с другой стороны.",
+        "Не то. Но ночь длинная — успеем разобраться."
+    ];
+    function pelmerSays(list, last) {
+        var n;
+        do { n = Math.floor(Math.random() * list.length); } while (list[n] === last);
+        return list[n];
+    }
     document.querySelectorAll(".quiz").forEach(function (quiz) {
-        var fb = quiz.querySelector(".fb");
+        var fb = quiz.querySelector(".fb"), last = "";
         quiz.querySelectorAll(".opts button").forEach(function (btn) {
             btn.addEventListener("click", function () {
                 quiz.querySelectorAll(".opts button").forEach(function (b) { b.classList.remove("right", "wrong"); });
-                if (btn.hasAttribute("data-ok")) {
-                    btn.classList.add("right");
-                    fb.textContent = "🎉 " + fb.dataset.okText;
-                } else {
-                    void btn.offsetWidth;
-                    btn.classList.add("wrong");
-                    fb.textContent = "🤔 " + fb.dataset.noText;
-                }
+                var ok = btn.hasAttribute("data-ok");
+                void btn.offsetWidth;
+                btn.classList.add(ok ? "right" : "wrong");
+                last = pelmerSays(ok ? PELMER_OK : PELMER_NO, last);
+                fb.classList.remove("ok", "no");
+                void fb.offsetWidth;
+                fb.classList.add(ok ? "ok" : "no");
+                // своё «Верно!» или «Не то.» из текста убираем: это теперь говорит Пелмер
+                var rest = (ok ? fb.dataset.okText : fb.dataset.noText).replace(/^(Верно!|Точно!|Да!|Не то\.|Не совсем\.|Попробуй другой вариант\.)\s*/, "");
+                fb.innerHTML = "<span><b>" + esc(last) + "</b> " + esc(rest) + "</span>";
             });
         });
     });
@@ -878,6 +914,155 @@
         box.style.transformOrigin = v.origin;
         showCode(root, cssRule(".box", p));
     });
+
+    /* Плавность: машинка */
+    (function () {
+        var root = document.getElementById("lab-transition");
+        if (!root) return;
+        var road = root.querySelector(".tr-road"), car = root.querySelector(".tr-car"), btn = root.querySelector("[data-go]");
+        function dist() { return Math.max(40, Math.round(road.clientWidth - car.offsetWidth - 46)); }
+        function setDist() { road.style.setProperty("--dist", dist() + "px"); }
+        btn.addEventListener("click", function () {
+            setDist();
+            var go = road.classList.toggle("go");
+            btn.textContent = go ? "◀ Назад" : "▶ Поехали!";
+        });
+        window.addEventListener("resize", setDist);
+        lab("lab-transition", function (v) {
+            var val = "transform " + v.dur + "s " + v.fn + (+v.delay ? " " + v.delay + "s" : "");
+            car.style.transition = val;
+            setDist();
+            var tips = {
+                "linear": "<code>linear</code>: машинка едет ровно, как по линейке.",
+                "ease": "<code>ease</code>: лёгкий разгон и плавное торможение. Так работает, если слово не писать.",
+                "ease-in": "<code>ease-in</code>: медленно трогается и влетает в финиш на полной скорости.",
+                "ease-out": "<code>ease-out</code>: срывается с места и плавно тормозит у флажка.",
+                "ease-in-out": "<code>ease-in-out</code>: плавно разгоняется и плавно тормозит."
+            };
+            note(root, tips[v.fn] + (+v.delay ? " Перед стартом ждёт " + v.delay + " с." : "") + " На компьютере можно просто навести мышку на дорогу.");
+            showCode(root, ".car {\n    transition: " + val + ";\n}\n.road:hover .car {\n    transform: translateX(" + dist() + "px);\n}");
+        });
+    })();
+
+    /* Плавность: какие свойства и где написан transition */
+    (function () {
+        var root = document.getElementById("lab-tprop");
+        if (!root) return;
+        var box = root.querySelector(".tp-box");
+        box.addEventListener("click", function () { box.classList.toggle("on"); });
+        lab("lab-tprop", function (v) {
+            var val = v.prop.split(",").map(function (p) { return p + " 0.8s"; }).join(", ");
+            box.style.setProperty("--t-base", v.where === "base" ? val : "none");
+            box.style.setProperty("--t-hover", val);
+            var changes = "    transform: rotate(10deg) scale(1.2);\n    background-color: gold;\n    border-radius: 50%;\n";
+            var code = v.where === "base"
+                ? ".box {\n    transition: " + val + ";\n}\n.box:hover {\n" + changes + "}"
+                : ".box:hover {\n    transition: " + val + ";\n" + changes + "}";
+            showCode(root, code);
+            var what = {
+                "all": "Плавно меняется всё: поворот, цвет и скругление углов.",
+                "transform": "Плавно — только поворот и размер. Цвет и круглые углы появляются сразу, скачком.",
+                "background-color": "Плавно — только цвет. Поворот и круглые углы появляются сразу, скачком.",
+                "transform,background-color": "Плавно — поворот и цвет. А углы (<code>border-radius</code>) скругляются скачком: их в списке нет."
+            };
+            note(root, what[v.prop] + " " + (v.where === "base"
+                ? "<code>transition</code> стоит у элемента — обратно блок тоже вернётся плавно."
+                : "<code>transition</code> стоит в <code>:hover</code> — убери мышку, и блок вернётся скачком."));
+        });
+    })();
+
+    /* Плавность: гонка */
+    (function () {
+        var root = document.getElementById("lab-race");
+        if (!root) return;
+        var btn = root.querySelector("[data-go]"), race = root.querySelector(".race");
+        function setDist() {
+            var track = root.querySelector(".race-track"), dot = root.querySelector(".race-dot");
+            race.style.setProperty("--dist", Math.max(30, track.clientWidth - dot.offsetWidth) + "px");
+        }
+        btn.addEventListener("click", function () {
+            setDist();
+            var go = race.classList.toggle("go");
+            btn.textContent = go ? "↩ Обратно" : "🏁 Старт";
+        });
+        window.addEventListener("resize", setDist);
+        lab("lab-race", function (v) {
+            root.querySelectorAll(".race-dot").forEach(function (d) {
+                d.style.transition = "transform " + v.dur + "s " + d.dataset.fn;
+            });
+            setDist();
+        });
+    })();
+
+    /* Видео с другого сайта: игрушечное меню */
+    (function () {
+        var root = document.getElementById("lab-embed");
+        if (!root) return;
+        var video = root.querySelector(".fake-video"), menu = root.querySelector(".fv-menu"), out = root.querySelector(".out code");
+        var CODE = '<iframe width="560" height="315"\n    src="https://www.youtube.com/embed/kot-i-snezhinki"\n    allowfullscreen></iframe>';
+        out.innerHTML = '<span class="t-com">&lt;!-- здесь появится код, когда ты его найдёшь --&gt;</span>';
+        note(root, "Открой меню видео и выбери пункт, который даёт код для сайта.");
+        function open(x, y) {
+            menu.hidden = false;
+            var r = video.getBoundingClientRect();
+            var left = Math.min(x - r.left, r.width - menu.offsetWidth - 8);
+            var top = Math.min(y - r.top, r.height - menu.offsetHeight - 8);
+            menu.style.left = Math.max(8, left) + "px";
+            menu.style.top = Math.max(8, top) + "px";
+        }
+        function center() { var r = video.getBoundingClientRect(); open(r.left + 40, r.top + 40); }
+        video.addEventListener("contextmenu", function (e) { e.preventDefault(); open(e.clientX, e.clientY); });
+        video.addEventListener("click", function (e) {
+            var item = e.target.closest("[data-act]");
+            if (item) {
+                menu.hidden = true;
+                var act = item.dataset.act;
+                if (act === "embed") {
+                    out.innerHTML = highlight(CODE, "html");
+                    note(root, "🎉 Нашёл! Это и есть код для сайта: он начинается с <code>&lt;iframe</code>. На настоящем видеосайте он сразу копируется — остаётся вставить его в свой HTML.");
+                } else if (act === "url") {
+                    out.innerHTML = esc("https://www.youtube.com/watch?v=kot-i-snezhinki");
+                    note(root, "🤔 Это просто <b>ссылка</b> на видео. По ней можно перейти, но плеер на странице она не покажет. Нужен другой пункт.");
+                } else {
+                    note(root, "🤔 Этот пункт про другое. Ищи тот, где есть слово <b>HTML</b>.");
+                }
+                return;
+            }
+            if (!menu.hidden) { menu.hidden = true; return; }
+            if (e.clientX || e.clientY) open(e.clientX, e.clientY); else center();
+        });
+        video.addEventListener("keydown", function (e) {
+            if ((e.key === "Enter" || e.key === " ") && e.target === video) { e.preventDefault(); center(); }
+            if (e.key === "Escape") menu.hidden = true;
+        });
+        document.addEventListener("click", function (e) { if (!video.contains(e.target)) menu.hidden = true; });
+    })();
+
+    /* Идеи для сайта */
+    (function () {
+        var root = document.getElementById("lab-idea");
+        if (!root) return;
+        var ideas = [
+            "Сайт про твоего питомца: фото, характер, любимые игрушки.",
+            "Топ-5 любимых игр с картинками и таблицей оценок.",
+            "Страничка твоего класса: расписание в таблице и список именинников.",
+            "Сайт-открытка на день рождения другу, с градиентом и плавным эффектом при наведении.",
+            "Рецепт любимого блюда: список продуктов и шаги по порядку.",
+            "Сайт про твоё хобби: рисунки, поделки, спорт или музыку.",
+            "Путеводитель по твоему городу: три места, куда стоит сходить.",
+            "Страничка про любимую книгу или мультфильм с героями и цитатами.",
+            "Сайт школьного кружка с формой «Записаться».",
+            "Твоё портфолио: страничка со ссылками на все сайты, которые ты сделал."
+        ];
+        var text = root.querySelector(".idea-text"), i = -1;
+        root.querySelector("[data-idea]").addEventListener("click", function () {
+            var n;
+            do { n = Math.floor(Math.random() * ideas.length); } while (n === i);
+            i = n;
+            text.textContent = ideas[i];
+            text.classList.remove("pop"); void text.offsetWidth; text.classList.add("pop");
+        });
+    })();
 
     /* Аудио: сами «сочиняем» короткую мелодию, чтобы не нужен был файл */
     (function () {

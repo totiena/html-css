@@ -75,13 +75,14 @@
             <a href="#pclass">Псевдоклассы</a>
             <a href="#pelem">Псевдоэлементы</a>
             <a href="#gradients">Градиенты и тени</a>
-            <a href="#transforms">Трансформации</a>
+            <a href="#transforms">Трансформации и плавность</a>
             <a href="#media">Видео и аудио</a>
 
             <p class="toc-group k-pub">Готово!</p>
             <a href="#publish">Публикация на GitHub</a>
             <a href="#hosting">Другие хостинги</a>
             <a href="#mistakes">Частые ошибки</a>
+            <a href="#next">Что дальше</a>
         </div>
     </nav>
 
@@ -92,6 +93,7 @@
             <div class="sec-head"><span class="badge">Начало</span><h2>Что такое HTML и CSS</h2></div>
             <p class="lead">Любой сайт — это обычные текстовые файлы. Браузер читает их и превращает в красивую страницу. Для этого есть два языка: <b>HTML</b> говорит, <b>что</b> есть на странице, а <b>CSS</b> — <b>как</b> это выглядит.</p>
 
+            <div class="tip tip-hello"><b>Привет! Я Пелмер, сова-программист.</b> Буду подсказывать тебе по дороге и иногда шутить. Совы не спят по ночам — прямо как настоящие программисты. Увидишь меня рядом с жёлтым облачком — там что-то полезное.</div>
             <h3>HTML — язык гипертекстовой разметки</h3>
             <div class="acro">
                 <div class="acro-part"><span class="acro-letter">H</span><span class="acro-word">Hyper</span><span class="acro-ru">гипер-, сверх-</span></div>
@@ -187,7 +189,7 @@
                     <p class="host-addr">Любой компьютер с интернетом</p>
                 </div>
             </div>
-            <div class="tip">💡 Если официальный сайт программы у тебя не открывается, выбери другой вариант из списка — все они подходят для HTML и CSS.</div>
+            <div class="tip">Если официальный сайт программы у тебя не открывается, выбери другой вариант из списка — все они подходят для HTML и CSS.</div>
 
             <h3>Как безопасно установить программу</h3>
             <ul class="checklist safe">
@@ -238,7 +240,7 @@
             </ol>
 
             <div class="warn">⚠️ <b>Если пишешь в Блокноте:</b> при сохранении выбери <b>«Тип файла: Все файлы»</b> и <b>«Кодировка: UTF-8»</b>. Иначе файл сохранится как <code>index.html.txt</code>, а русские буквы превратятся в непонятные значки.</div>
-            <div class="tip">💡 Чтобы видеть окончания файлов (<code>.html</code>, <code>.txt</code>, <code>.jpg</code>), включи их в Windows: <b>Проводник → Вид → Показать → Расширения имён файлов</b>.</div>
+            <div class="tip">Чтобы видеть окончания файлов (<code>.html</code>, <code>.txt</code>, <code>.jpg</code>), включи их в Windows: <b>Проводник → Вид → Показать → Расширения имён файлов</b>. Окончание — как фамилия файла: по ней сразу видно, из какой он семьи.</div>
 
             <h3>Как работать: три шага по кругу</h3>
             <div class="cycle">
@@ -288,7 +290,7 @@
                 <figure><img src="net-takoy-kartinki.jpg" alt="Здесь был котик" width="140" height="100"><figcaption>картинка пропала — виден только <code>alt</code></figcaption></figure>
                 <figure><img src="star.svg" alt="Звезда" width="100" height="100"><figcaption>своя картинка на месте</figcaption></figure>
             </div>
-            <div class="tip">💡 Поэтому всегда пиши <code>alt</code> — описание картинки. Если она не загрузится, человек хотя бы прочитает, что там было.</div>
+            <div class="tip">Поэтому всегда пиши <code>alt</code> — описание картинки. Если она не загрузится, человек хотя бы прочитает, что там было. Например: «Здесь была очень красивая сова».</div>
 
             <h3>Как сохранить картинку к себе</h3>
             <ol class="steps">
@@ -343,8 +345,8 @@
                     <tr><td><code>.webp</code></td><td>Современный формат: хорошее качество и маленький вес</td></tr>
                 </tbody>
             </table>
-            <div class="tip">💡 Лучше всего свои рисунки и фотографии. Чужие картинки — тоже чья-то работа, поэтому бери их на сайтах, где разрешено пользоваться бесплатно (например, Unsplash или Pixabay). Не выкладывай фото других людей без их разрешения.</div>
-            <div class="tip">💡 Фото с телефона весит несколько мегабайт и долго грузится. Уменьши его перед тем, как класть на сайт, а на странице задай размер: <code>&lt;img src="img/cat.jpg" width="400"&gt;</code>.</div>
+            <div class="tip">Лучше всего свои рисунки и фотографии. Чужие картинки — тоже чья-то работа, поэтому бери их на сайтах, где разрешено пользоваться бесплатно (например, Unsplash или Pixabay). Не выкладывай фото других людей без их разрешения.</div>
+            <div class="tip">Фото с телефона весит несколько мегабайт и долго грузится. Уменьши его перед тем, как класть на сайт, а на странице задай размер: <code>&lt;img src="img/cat.jpg" width="400"&gt;</code>.</div>
 
             <div class="quiz">
                 <p class="q">🧩 Проверь себя: <code>index.html</code> лежит в папке сайта, а <code>cat.jpg</code> — в её подпапке <code>img</code>. Какой путь правильный?</p>
@@ -408,7 +410,7 @@
                 </html>
             </script>
 
-            <div class="tip">💡 <b>Отступы в коде</b> браузер не видит, они нужны людям. Вложенный тег сдвигай вправо — так сразу видно, что где лежит.</div>
+            <div class="tip"><b>Отступы в коде</b> браузер не видит, они нужны людям. Вложенный тег сдвигай вправо — так сразу видно, что где лежит. Порядок в коде — как порядок в гнезде: сразу понятно, где чьё.</div>
 
             <h3>Что лежит в &lt;head&gt; и зачем</h3>
             <p><code>&lt;head&gt;</code> — служебная часть страницы. На самом сайте её не видно, но без неё сайт работает плохо: ломаются буквы, пропадают стили, на телефоне всё становится крошечным.</p>
@@ -535,8 +537,8 @@ footer {
                 <section id="tables">...</section>
             </script>
             <p class="try-line">Проверь: <a href="#tables" class="btn-link">Прыгнуть к таблицам ↓</a> — посмотри, как изменится адрес в строке браузера. Всё оглавление слева сделано так же.</p>
-            <div class="tip">🖼️ Как сохранить картинку из интернета к себе и правильно написать путь в <code>src</code> — в разделе <a href="#images">«Картинки: храним у себя»</a>.</div>
-            <div class="tip">💡 Чтобы ссылка открылась в <b>новой вкладке</b>, добавь <code>target="_blank"</code>: <code>&lt;a href="https://ya.ru" target="_blank"&gt;</code></div>
+            <div class="tip">Как сохранить картинку из интернета к себе и правильно написать путь в <code>src</code> — в разделе <a href="#images">«Картинки: храним у себя»</a>.</div>
+            <div class="tip">Чтобы ссылка открылась в <b>новой вкладке</b>, добавь <code>target="_blank"</code>: <code>&lt;a href="https://ya.ru" target="_blank"&gt;</code></div>
 
             <div class="play">
                 <p class="lab-title">✏️ Попробуй сам: добавь свой абзац, поменяй картинку на ссылку</p>
@@ -619,7 +621,7 @@ th {
                 </div>
                 <button type="button" class="btn-reset">↺ Вернуть как было</button>
             </div>
-            <div class="tip">💡 Без CSS у таблицы нет линий. Их добавляет <code>border</code>, а <code>border-collapse: collapse</code> склеивает двойные линии в одну.</div>
+            <div class="tip">Без CSS у таблицы нет линий. Их добавляет <code>border</code>, а <code>border-collapse: collapse</code> склеивает двойные линии в одну.</div>
         </section>
 
         <!-- ===== СПИСКИ ===== -->
@@ -701,7 +703,7 @@ th {
                     <tr><td><code>&lt;button&gt;</code></td><td>Кнопка</td><td><button type="button" class="demo-btn">Отправить</button></td></tr>
                 </tbody>
             </table>
-            <div class="tip">💡 У радиокнопок из одной группы должно быть <b>одинаковое</b> <code>name</code> — тогда можно выбрать только одну. Если положить кружок <b>внутрь</b> <code>&lt;label&gt;</code>, он встанет ровно напротив слова, и выбирать можно нажатием на слово.</div>
+            <div class="tip">У радиокнопок из одной группы должно быть <b>одинаковое</b> <code>name</code> — тогда можно выбрать только одну. Если положить кружок <b>внутрь</b> <code>&lt;label&gt;</code>, он встанет ровно напротив слова, и выбирать можно нажатием на слово.</div>
 
             <div class="play">
                 <p class="lab-title">✏️ Попробуй сам: добавь ещё один вариант оценки</p>
@@ -771,7 +773,7 @@ button {
                     </div>
                 </div>
             </div>
-            <div class="tip">💡 Форма отправляет только поля, у которых есть атрибут <code>name</code>. Данные уходят парами <b>имя поля = что написали</b>. Нет <code>name</code> — поле не отправится, даже если его заполнили.</div>
+            <div class="tip">Форма отправляет только поля, у которых есть атрибут <code>name</code>. Данные уходят парами <b>имя поля = что написали</b>. Нет <code>name</code> — поле не отправится, даже если его заполнили.</div>
 
             <h3>Способ 1. Google Формы — проще всего</h3>
             <p>Форму делаешь не кодом, а в конструкторе Google, а потом вставляешь её на свой сайт. Ответы собираются в Google Форме и в Google Таблице.</p>
@@ -818,7 +820,7 @@ button {
         <!-- ===== КОНТЕЙНЕРЫ ===== -->
         <section id="containers" class="sec k-lay">
             <div class="sec-head"><span class="badge">Разметка</span><h2>Контейнеры</h2></div>
-            <div class="tip">💡 В этом блоке встретятся первые свойства CSS: <code>display</code>, <code>flex</code>, <code>position</code>. Их пишут в файле <code>style.css</code>. Как подключить этот файл — в разделе <a href="#structure">«Каркас страницы»</a>, как устроено правило CSS — в разделе <a href="#cssrule">«Как писать CSS»</a>.</div>
+            <div class="tip">В этом блоке встретятся первые свойства CSS: <code>display</code>, <code>flex</code>, <code>position</code>. Их пишут в файле <code>style.css</code>. Как подключить этот файл — в разделе <a href="#structure">«Каркас страницы»</a>, как устроено правило CSS — в разделе <a href="#cssrule">«Как писать CSS»</a>.</div>
             <p class="lead">Контейнер — это <b>коробка</b>, в которую складывают другие элементы, чтобы красить и двигать их вместе. Главная коробка — <code>&lt;div&gt;</code>. Ей дают класс и оформляют в CSS.</p>
             <div class="dict" data-words="div|span|class|header|nav|main|section|article|aside|footer|display|block|inline|inline-block|none|width|height"></div>
             <script type="text/plain" class="code" data-lang="html">
@@ -959,7 +961,7 @@ button {
                     <tr><td><code>flex-grow: 1</code></td><td>ребёнку</td><td>Растягивается на всё свободное место</td></tr>
                 </tbody>
             </table>
-            <div class="tip">💡 Волшебная формула «поставить ровно в центр»: <code>display: flex; justify-content: center; align-items: center;</code></div>
+            <div class="tip">Волшебная формула «поставить ровно в центр»: <code>display: flex; justify-content: center; align-items: center;</code> Я так однажды поставил в центр себя — вышло красиво.</div>
 
             <div class="quiz">
                 <p class="q">🧩 Проверь себя: кнопки меню стоят в ряд. Как раздвинуть их по краям, чтобы между ними было одинаковое место?</p>
@@ -1036,7 +1038,7 @@ button {
                     right: 10px;          /* правый верхний угол карточки */
                 }
             </script>
-            <div class="tip">💡 Если элементы налезают друг на друга, <code>z-index</code> решает, кто сверху: у кого число больше, тот выше. Работает, только если <code>position</code> не <code>static</code>.</div>
+            <div class="tip">Если элементы налезают друг на друга, <code>z-index</code> решает, кто сверху: у кого число больше, тот выше. Работает, только если <code>position</code> не <code>static</code>. Это как куча-мала: кого видно, тот и сверху.</div>
         </section>
 
         <!-- ===== ПРАВИЛО CSS ===== -->
@@ -1232,7 +1234,7 @@ button {
                     </div>
                 </div>
             </div>
-            <div class="tip">💡 <code>margin: 0 auto;</code> ставит блок с заданной шириной (<code>width</code>) ровно по центру страницы.</div>
+            <div class="tip"><code>margin: 0 auto;</code> ставит блок с заданной шириной (<code>width</code>) ровно по центру страницы.</div>
         </section>
 
         <!-- ===== МАРКЕРЫ ===== -->
@@ -1269,7 +1271,7 @@ button {
                     </div>
                 </div>
             </div>
-            <div class="tip">💡 Для картинки-маркера положи маленькую картинку (примерно 16×16 пикселей) рядом с сайтом и укажи её имя в <code>url("…")</code>.</div>
+            <div class="tip">Для картинки-маркера положи маленькую картинку (примерно 16×16 пикселей) рядом с сайтом и укажи её имя в <code>url("…")</code>.</div>
         </section>
 
         <!-- ===== ПСЕВДОКЛАССЫ ===== -->
@@ -1350,7 +1352,7 @@ button {
                     </script>
                 </div>
             </div>
-            <div class="tip">💡 Добавь элементу <code>transition: 0.3s;</code> — и изменения при <code>:hover</code> станут плавными, а не резкими.</div>
+            <div class="tip">Добавь элементу <code>transition: 0.3s;</code> — и изменения при <code>:hover</code> станут плавными, а не резкими.</div>
         </section>
 
         <!-- ===== ПСЕВДОЭЛЕМЕНТЫ ===== -->
@@ -1369,7 +1371,7 @@ button {
                     <tr><td><code>::placeholder</code></td><td>Серая подсказка в пустом поле</td></tr>
                 </tbody>
             </table>
-            <div class="tip">🤔 <b>А последнюю букву или строчку можно?</b> Нет: псевдоэлементов <code>::last-letter</code> и <code>::last-line</code> в CSS не существует, браузеры так не умеют. Зато <b>последний элемент</b> — последний пункт списка, последнюю клеточку в строке таблицы, последний абзац — выбрать можно. Это делают псевдоклассы: <code>:last-child</code> (последний), <code>:nth-last-child(2)</code> (второй с конца), <code>:last-of-type</code> (последний такого тега). Подробнее — в разделе <a href="#pclass">«Псевдоклассы»</a>.</div>
+            <div class="tip"><b>А последнюю букву или строчку можно?</b> Нет: псевдоэлементов <code>::last-letter</code> и <code>::last-line</code> в CSS не существует, браузеры так не умеют. Зато <b>последний элемент</b> — последний пункт списка, последнюю клеточку в строке таблицы, последний абзац — выбрать можно. Это делают псевдоклассы: <code>:last-child</code> (последний), <code>:nth-last-child(2)</code> (второй с конца), <code>:last-of-type</code> (последний такого тега). Подробнее — в разделе <a href="#pclass">«Псевдоклассы»</a>.</div>
             <div class="warn">⚠️ У <code>::before</code> и <code>::after</code> обязательно должно быть свойство <code>content</code>. Без него они не появятся. Если текст не нужен, пишут пустые кавычки: <code>content: "";</code></div>
 
             <div class="lab" id="lab-pe">
@@ -1437,7 +1439,7 @@ button {
                     <tr><td>Мишень</td><td><code>background-image: repeating-radial-gradient(circle, white 0 10px, pink 10px 20px);</code></td><td><span class="g-sw" style="background-image:repeating-radial-gradient(circle,white 0 10px,pink 10px 20px)"></span></td></tr>
                 </tbody>
             </table>
-            <div class="tip">💡 <code>background-image</code> и <code>background</code> здесь работают одинаково. Разница: <code>background</code> — «общее» свойство, оно заменяет сразу и цвет, и картинку фона. <code>background-image</code> меняет только картинку.</div>
+            <div class="tip"><code>background-image</code> и <code>background</code> здесь работают одинаково. Разница: <code>background</code> — «общее» свойство, оно заменяет сразу и цвет, и картинку фона. <code>background-image</code> меняет только картинку.</div>
 
             <h3>Куда направить градиент</h3>
             <table class="ref fit">
@@ -1496,7 +1498,7 @@ button {
                     color: white;
                 }
             </script>
-            <div class="tip">💡 Полупрозрачный цвет: <code>rgba(0, 0, 0, 0.5)</code>. Последнее число — прозрачность от 0 (невидимый) до 1 (обычный).</div>
+            <div class="tip">Полупрозрачный цвет: <code>rgba(0, 0, 0, 0.5)</code>. Последнее число — прозрачность от 0 (невидимый) до 1 (обычный). Ноль — это как я ночью в лесу: я есть, а не видно.</div>
 
             <h3>Тени: box-shadow</h3>
             <p>Тень рисуется свойством <code>box-shadow</code>. В нём по порядку пишут: <b>сдвиг вправо</b>, <b>сдвиг вниз</b>, <b>размытие</b>, <b>растяжение</b> и <b>цвет</b>. Слово <code>inset</code> в начале делает тень <b>внутри</b> блока.</p>
@@ -1540,18 +1542,30 @@ button {
 
         <!-- ===== ТРАНСФОРМАЦИИ ===== -->
         <section id="transforms" class="sec k-fx">
-            <div class="sec-head"><span class="badge">Эффекты</span><h2>Двумерные трансформации</h2></div>
-            <p class="lead">Свойство <code>transform</code> двигает, крутит, увеличивает и наклоняет элемент. Соседи при этом стоят на месте, как будто ничего не произошло.</p>
-            <div class="dict" data-words="transform|translate|rotate|scale|skew|transform-origin|transition"></div>
+            <div class="sec-head"><span class="badge">Эффекты</span><h2>Трансформации и плавность</h2></div>
+            <p class="lead">Свойство <code>transform</code> двигает, крутит, увеличивает и наклоняет элемент. Соседи при этом стоят на месте, как будто ничего не произошло. А свойство <code>transition</code> делает любое изменение плавным.</p>
+            <div class="dict" data-words="transform|translate|translateX|translateY|rotate|scale|scaleX|scaleY|skew|transform-origin|transition|ease|linear|ease-in|ease-out|ease-in-out|all|transition-duration|transition-delay|opacity"></div>
             <table class="ref">
                 <thead><tr><th>Функция</th><th>Что делает</th><th>Пример</th></tr></thead>
                 <tbody>
-                    <tr><td><code>translate(x, y)</code></td><td>Сдвиг вправо и вниз</td><td><code>translate(50px, 20px)</code></td></tr>
-                    <tr><td><code>rotate(угол)</code></td><td>Поворот по часовой стрелке (минус — против)</td><td><code>rotate(45deg)</code></td></tr>
-                    <tr><td><code>scale(число)</code></td><td>Увеличение: 1 — как было, 2 — в 2 раза больше, 0.5 — в 2 раза меньше</td><td><code>scale(1.5)</code></td></tr>
-                    <tr><td><code>skew(угол)</code></td><td>Наклон, как будто блок толкнули</td><td><code>skew(20deg)</code></td></tr>
+                    <tr><td><code>translateX(x)</code></td><td>Сдвиг по горизонтали: плюс — вправо, минус — влево</td><td><code>translateX(400px)</code></td></tr>
+                    <tr><td><code>translateY(y)</code></td><td>Сдвиг по вертикали: плюс — вниз, минус — вверх</td><td><code>translateY(-20px)</code></td></tr>
+                    <tr><td><code>translate(x, y)</code></td><td>Сдвиг сразу в две стороны: сначала вправо, потом вниз</td><td><code>translate(50px, 20px)</code></td></tr>
+                    <tr><td><code>rotate(угол)</code></td><td>Поворот по часовой стрелке (минус — против). Полный круг — 360deg</td><td><code>rotate(45deg)</code></td></tr>
+                    <tr><td><code>scale(число)</code></td><td>Размер: 1 — как было, 2 — в 2 раза больше, 0.5 — в 2 раза меньше</td><td><code>scale(1.5)</code></td></tr>
+                    <tr><td><code>scaleX(число)</code><br><code>scaleY(число)</code></td><td>Растянуть только в ширину или только в высоту</td><td><code>scaleX(2)</code></td></tr>
+                    <tr><td><code>skewX(угол)</code><br><code>skewY(угол)</code></td><td>Наклон, как будто блок толкнули вбок или вверх</td><td><code>skewX(20deg)</code></td></tr>
                 </tbody>
             </table>
+            <div class="tip">Буква в конце подсказывает направление: <b>X</b> — по горизонтали (влево-вправо), <b>Y</b> — по вертикали (вверх-вниз). Как оси на уроке математики.</div>
+            <p>Несколько трансформаций пишут <b>в одной строчке через пробел</b>:</p>
+            <script type="text/plain" class="code" data-lang="css">
+                .box {
+                    transform: translateX(50px) rotate(10deg) scale(1.2);
+                }
+            </script>
+            <div class="warn">⚠️ Не пиши <code>transform</code> два раза в одном правиле: сработает только последняя строчка, а первая пропадёт.</div>
+
 
             <div class="lab" id="lab-transform">
                 <p class="lab-title">🎛️ Попробуй сам: пунктир — место, где блок был сначала</p>
@@ -1577,22 +1591,178 @@ button {
                     </div>
                 </div>
             </div>
-            <p>Кнопка, которая чуть увеличивается при наведении (наведи на неё!):</p>
-            <div class="stage center"><button type="button" class="grow-btn">Наведи на меня</button></div>
+            <h3>Плавность: transition</h3>
+            <p>Сам по себе <code>transform</code> срабатывает <b>мгновенно</b>: блок просто «перепрыгивает» в новое место. Свойство <code>transition</code> говорит браузеру: «не прыгай, а плавно доедь». Наведи на обе кнопки и сравни:</p>
+            <div class="stage center">
+                <div class="tr-pair"><button type="button" class="jump-btn">Без transition</button><small>скачком</small></div>
+                <div class="tr-pair"><button type="button" class="grow-btn">С transition</button><small>плавно</small></div>
+            </div>
             <script type="text/plain" class="code" data-lang="css">
-                .grow-btn {
-                    transition: transform 0.3s;   /* плавно */
+                .button {
+                    transition: 0.3s;                       /* меняйся плавно, за 0.3 секунды */
                 }
-                .grow-btn:hover {
-                    transform: scale(1.15) rotate(-3deg);
+                .button:hover {
+                    transform: scale(1.15) rotate(-3deg);   /* что должно получиться */
                 }
             </script>
+
+            <p>Из чего состоит <code>transition</code>. Обязательно только время, остальное можно не писать:</p>
+            <div class="shadow-anatomy">
+                <span class="sa-part"><b>transform</b><small>что меняем плавно</small></span>
+                <span class="sa-part"><b>1s</b><small>сколько длится</small></span>
+                <span class="sa-part"><b>ease-out</b><small>как движется</small></span>
+                <span class="sa-part"><b>0.5s</b><small>пауза перед стартом</small></span>
+            </div>
+            <table class="ref">
+                <thead><tr><th>Запись</th><th>Как её прочитать</th></tr></thead>
+                <tbody>
+                    <tr><td><code>transition: 1s;</code></td><td>Все изменения — плавно, за 1 секунду</td></tr>
+                    <tr><td><code>transition: all 1s;</code></td><td>То же самое, но понятнее: <code>all</code> значит «все свойства»</td></tr>
+                    <tr><td><code>transition: 1s ease-out;</code></td><td>За 1 секунду, быстро стартуя и плавно тормозя</td></tr>
+                    <tr><td><code>transition: transform 1s;</code></td><td>Плавно меняется только <code>transform</code>, остальное — сразу</td></tr>
+                    <tr><td><code>transition: transform 1s, color 0.5s;</code></td><td>Два свойства через запятую, у каждого своё время</td></tr>
+                    <tr><td><code>transition: 1s ease-out 0.5s;</code></td><td>Сначала подождать полсекунды, потом двигаться 1 секунду</td></tr>
+                </tbody>
+            </table>
+            <div class="tip">Время пишут в секундах — <code>1s</code>, <code>0.5s</code> — или в миллисекундах: <code>500ms</code> — это полсекунды (в одной секунде 1000 миллисекунд). Первое время в строчке — длительность, второе — пауза. Для сравнения: я моргаю примерно за 300ms.</div>
+
+            <div class="lab" id="lab-transition">
+                <p class="lab-title">🚗 Попробуй сам: настрой transition и отправь машинку в путь</p>
+                <div class="lab-grid">
+                    <div class="controls">
+                        <label class="ctrl">Длительность: <b data-show="dur"></b>s <input type="range" min="0.2" max="3" value="1" step="0.1" data-k="dur"></label>
+                        <div class="ctrl">Как движется
+                            <div class="chips" data-k="fn">
+                                <button type="button" data-v="linear">linear</button>
+                                <button type="button" data-v="ease">ease</button>
+                                <button type="button" data-v="ease-in">ease-in</button>
+                                <button type="button" data-v="ease-out" class="on" data-default>ease-out</button>
+                                <button type="button" data-v="ease-in-out">ease-in-out</button>
+                            </div>
+                        </div>
+                        <label class="ctrl">Пауза перед стартом: <b data-show="delay"></b>s <input type="range" min="0" max="2" value="0" step="0.5" data-k="delay"></label>
+                        <button type="button" class="go-btn" data-go>▶ Поехали!</button>
+                        <p class="note" data-note></p>
+                    </div>
+                    <div>
+                        <div class="stage tr-stage"><div class="tr-road"><span class="tr-car"><span class="tr-flip">🚗</span></span><span class="tr-flag">🏁</span></div></div>
+                        <pre class="out"><code></code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Как движется: пять характеров</h3>
+            <table class="ref">
+                <thead><tr><th>Слово</th><th>Как едет</th></tr></thead>
+                <tbody>
+                    <tr><td><code>linear</code></td><td>Ровно, с одной скоростью — как робот</td></tr>
+                    <tr><td><code>ease</code></td><td>Чуть разгоняется и плавно тормозит. Так будет, если ничего не написать</td></tr>
+                    <tr><td><code>ease-in</code></td><td>Медленно трогается и разгоняется — как машина на светофоре</td></tr>
+                    <tr><td><code>ease-out</code></td><td>Быстро стартует и плавно тормозит — как мяч, который катится и останавливается</td></tr>
+                    <tr><td><code>ease-in-out</code></td><td>Плавно разгоняется и плавно тормозит — как качели</td></tr>
+                </tbody>
+            </table>
+            <div class="lab" id="lab-race">
+                <p class="lab-title">🏁 Попробуй сам: гонка. Все стартуют и финишируют одновременно — следи, кто как едет</p>
+                <div class="race">
+                    <div class="race-lane"><code>linear</code><div class="race-track"><span class="race-dot" data-fn="linear"></span></div></div>
+                    <div class="race-lane"><code>ease</code><div class="race-track"><span class="race-dot" data-fn="ease"></span></div></div>
+                    <div class="race-lane"><code>ease-in</code><div class="race-track"><span class="race-dot" data-fn="ease-in"></span></div></div>
+                    <div class="race-lane"><code>ease-out</code><div class="race-track"><span class="race-dot" data-fn="ease-out"></span></div></div>
+                    <div class="race-lane"><code>ease-in-out</code><div class="race-track"><span class="race-dot" data-fn="ease-in-out"></span></div></div>
+                </div>
+                <div class="race-bar">
+                    <button type="button" class="go-btn" data-go>🏁 Старт</button>
+                    <label class="ctrl">Время гонки: <b data-show="dur"></b>s <input type="range" min="1" max="4" value="2" step="0.5" data-k="dur"></label>
+                </div>
+            </div>
+
+            <h3>Что ещё можно менять плавно</h3>
+            <p>Не только <code>transform</code>: плавно меняются цвет, прозрачность, тень, размер. Наведи на каждую плитку (на телефоне — нажми):</p>
+            <div class="tr-tiles">
+                <div class="tr-tile-wrap"><button type="button" class="tr-tile t-up">Прыжок</button><code>transform: translateY(-12px);</code></div>
+                <div class="tr-tile-wrap"><button type="button" class="tr-tile t-spin">Кувырок</button><code>transform: rotate(360deg);</code></div>
+                <div class="tr-tile-wrap"><button type="button" class="tr-tile t-big">Рост</button><code>transform: scale(1.25);</code></div>
+                <div class="tr-tile-wrap"><button type="button" class="tr-tile t-color">Цвет</button><code>background-color: gold;</code></div>
+                <div class="tr-tile-wrap"><button type="button" class="tr-tile t-fade">Призрак</button><code>opacity: 0.25;</code></div>
+                <div class="tr-tile-wrap"><button type="button" class="tr-tile t-shadow">Тень</button><code>box-shadow: 0 10px 0 0 blue;</code></div>
+            </div>
+            <script type="text/plain" class="code" data-lang="css">
+                .tile {
+                    transition: 0.4s;      /* одна строчка — и всё меняется плавно */
+                }
+                .tile:hover {
+                    opacity: 0.25;         /* сюда — любую строчку из-под плиток */
+                }
+            </script>
+            <p><code>opacity</code> — это прозрачность: <code>1</code> — элемент видно полностью, <code>0.5</code> — наполовину, <code>0</code> — он невидимка.</p>
+            <h3>Какие свойства менять плавно</h3>
+            <p>В <code>transition</code> можно назвать, <b>что именно</b> должно меняться плавно. Всё остальное изменится сразу, скачком.</p>
+            <table class="ref">
+                <thead><tr><th>Хочу плавно…</th><th>Пишу</th></tr></thead>
+                <tbody>
+                    <tr><td>одно свойство</td><td><code>transition: transform 1s;</code></td></tr>
+                    <tr><td>два свойства — через запятую</td><td><code>transition: transform 1s, background-color 1s;</code></td></tr>
+                    <tr><td>все свойства сразу</td><td><code>transition: all 1s;</code></td></tr>
+                </tbody>
+            </table>
+            <div class="tip">Слово <code>all</code> значит «всё». Если его пропустить и написать просто <code>transition: 1s;</code>, браузер сам подставит <code>all</code>. Но с <code>all</code> код читается понятнее: сразу видно, что плавным будет всё. Я вот тоже люблю всё и сразу — особенно на ужин.</div>
+
+            <h3>Где писать transition: у элемента или в :hover</h3>
+            <p>Строчку <code>transition</code> можно поставить в двух местах, и работает она по-разному:</p>
+            <div class="two-col">
+                <div class="mini-card">
+                    <h3>У самого элемента</h3>
+                    <p>Плавно <b>и туда, и обратно</b>: когда мышку навели и когда убрали. Так пишут чаще всего.</p>
+                </div>
+                <div class="mini-card">
+                    <h3>Внутри :hover</h3>
+                    <p>Плавно <b>только туда</b>: при наведении. Когда мышку уберут, элемент вернётся скачком — ведь правило <code>:hover</code> уже не работает, а <code>transition</code> был в нём.</p>
+                </div>
+            </div>
+            <div class="lab" id="lab-tprop">
+                <p class="lab-title">🎛️ Попробуй сам: выбери, что менять плавно и где стоит transition, потом наведи на блок и убери мышку (на телефоне — нажимай на блок)</p>
+                <div class="lab-grid">
+                    <div class="controls">
+                        <div class="ctrl">Что меняется плавно
+                            <div class="chips" data-k="prop">
+                                <button type="button" data-v="all" class="on" data-default>all</button>
+                                <button type="button" data-v="transform">transform</button>
+                                <button type="button" data-v="background-color">background-color</button>
+                                <button type="button" data-v="transform,background-color">transform и background-color</button>
+                            </div>
+                        </div>
+                        <div class="ctrl">Где написан transition
+                            <div class="chips" data-k="where">
+                                <button type="button" data-v="base" class="on" data-default>у элемента</button>
+                                <button type="button" data-v="hover">в :hover</button>
+                            </div>
+                        </div>
+                        <p class="note" data-note></p>
+                    </div>
+                    <div>
+                        <div class="stage center"><button type="button" class="tp-box">Наведи</button></div>
+                        <pre class="out"><code></code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="tip">Если сомневаешься — пиши <code>transition</code> у самого элемента: так движение плавное в обе стороны. Плавность — это красиво. Я вот резко двигаюсь, только когда вижу мышку. Не компьютерную.</div>
+            <div class="warn">⚠️ Если элемент при наведении далеко уезжает (<code>translateX(400px)</code>), он убегает из-под мышки и начинает дёргаться. Хитрость: наводить на <b>родителя</b>, а двигать ребёнка — <code>.road:hover .car { … }</code>, как в примере с машинкой.</div>
+            <div class="quiz">
+                <p class="q">🧩 Проверь себя: что значит <code>transition: 2s ease-in;</code>?</p>
+                <div class="opts">
+                    <button type="button">Подождать 2 секунды и перепрыгнуть</button>
+                    <button type="button" data-ok>Меняться 2 секунды, медленно разгоняясь</button>
+                    <button type="button">Сдвинуться на 2 пикселя</button>
+                </div>
+                <p class="fb" data-ok-text="Верно! 2s — сколько длится, ease-in — медленный старт и разгон." data-no-text="Не совсем. 2s — это время (s — секунды), а ease-in говорит, как двигаться: медленно начать и разогнаться."></p>
+            </div>
         </section>
 
         <!-- ===== ВИДЕО И АУДИО ===== -->
         <section id="media" class="sec k-fx">
             <div class="sec-head"><span class="badge">Эффекты</span><h2>Видео и аудио на сайте</h2></div>
-            <p class="lead">Свой файл вставляется тегом <code>&lt;video&gt;</code> или <code>&lt;audio&gt;</code>. Видео с YouTube, VK или Rutube — через <code>&lt;iframe&gt;</code>.</p>
+            <p class="lead">Свой файл вставляется тегом <code>&lt;video&gt;</code> или <code>&lt;audio&gt;</code>. Видео и музыку с YouTube, VK, Rutube и других сайтов — через <code>&lt;iframe&gt;</code>: готовый код можно скопировать прямо с этих сайтов.</p>
             <div class="dict" data-words="video|audio|src|controls|autoplay|muted|loop|poster|width|iframe|embed|allowfullscreen"></div>
 
             <div class="lab" id="lab-media">
@@ -1632,20 +1802,71 @@ button {
                     <tr><td><code>width</code></td><td>Ширина видео</td></tr>
                 </tbody>
             </table>
-            <div class="tip">💡 Лучшие форматы: видео — <code>.mp4</code>, звук — <code>.mp3</code>. Положи файл в папку сайта и напиши его имя в <code>src</code> точно так же, как оно называется.</div>
+            <div class="tip">Лучшие форматы: видео — <code>.mp4</code>, звук — <code>.mp3</code>. Положи файл в папку сайта и напиши его имя в <code>src</code> точно так же, как оно называется.</div>
 
             <h3>Видео с YouTube, VK или Rutube</h3>
-            <ol class="steps">
-                <li>Открой видео и нажми <b>«Поделиться»</b>.</li>
-                <li>Выбери <b>«Встроить»</b> (или «Код для вставки»).</li>
-                <li>Скопируй код, который начинается с <code>&lt;iframe</code>, и вставь в свой HTML.</li>
-            </ol>
+            <p>Чужое видео не нужно скачивать: у видеосайтов есть <b>готовый HTML-код для вставки</b>. Его надо только найти и скопировать. Способов два.</p>
+            <div class="two-col">
+                <div class="mini-card">
+                    <h3>🖱️ Быстро: правой кнопкой по видео</h3>
+                    <p>Нажми <b>на само видео</b> правой кнопкой мыши. В меню выбери <b>«Копировать HTML-код»</b> (YouTube) или <b>«Скопировать код для вставки плеера»</b> (Rutube). Код уже скопирован — вставляй его в свой HTML через <kbd>Ctrl</kbd>+<kbd>V</kbd>.</p>
+                </div>
+                <div class="mini-card">
+                    <h3>📤 Через «Поделиться»</h3>
+                    <p>Под видео нажми <b>«Поделиться»</b> → <b>«Встроить»</b>. В VK Видео: <b>«Ещё»</b> → <b>«Экспортировать»</b>. Скопируй код, который начинается с <code>&lt;iframe</code>.</p>
+                </div>
+            </div>
+            <div class="tip">На телефоне правой кнопки нет, а кнопку «Встроить» часто прячут. Код для вставки удобнее брать с компьютера.</div>
+
+            <div class="lab" id="lab-embed">
+                <p class="lab-title">🖱️ Попробуй сам: нажми на «видео» правой кнопкой (на телефоне — просто нажми) и найди код для сайта</p>
+                <div class="lab-grid">
+                    <div>
+                        <div class="fake-video" tabindex="0" role="button" aria-label="Игрушечное видео: открыть меню">
+                            <span class="fv-play">▶</span>
+                            <span class="fv-title">Мой кот ловит снежинки</span>
+                            <span class="fv-bar"><i></i></span>
+                            <div class="fv-menu" hidden>
+                                <button type="button" data-act="loop">🔁 Повтор</button>
+                                <button type="button" data-act="url">🔗 Копировать URL видео</button>
+                                <button type="button" data-act="embed">&lt;/&gt; Копировать HTML-код</button>
+                                <button type="button" data-act="stats">📊 Статистика для сисадминов</button>
+                            </div>
+                        </div>
+                        <p class="note" data-note></p>
+                    </div>
+                    <pre class="out"><code></code></pre>
+                </div>
+            </div>
+
+            <p>Вот что ты скопируешь. Разберём по кусочкам:</p>
             <script type="text/plain" class="code" data-lang="html">
                 <iframe width="560" height="315"
                     src="https://www.youtube.com/embed/КОД_ВИДЕО"
                     allowfullscreen></iframe>
             </script>
-            <div class="tip">💡 Чтобы видео не вылезало за экран телефона: <code>video, iframe { max-width: 100%; }</code></div>
+            <table class="ref">
+                <thead><tr><th>Кусочек</th><th>Что это</th><th>Можно менять?</th></tr></thead>
+                <tbody>
+                    <tr><td><code>&lt;iframe&gt;</code></td><td>Окошко, в котором на твоей странице открывается чужой плеер</td><td>Нет</td></tr>
+                    <tr><td><code>src</code></td><td>Адрес плеера с нужным видео</td><td>Нет, иначе видео не найдётся</td></tr>
+                    <tr><td><code>width</code>, <code>height</code></td><td>Ширина и высота окошка в пикселях</td><td>Да, подбери свой размер</td></tr>
+                    <tr><td><code>allowfullscreen</code></td><td>Разрешает развернуть видео на весь экран</td><td>Лучше оставить</td></tr>
+                </tbody>
+            </table>
+            <p>В настоящем коде бывают и другие слова (<code>title</code>, <code>allow</code>, <code>frameborder</code>). Их можно не трогать: вставляй код целиком, как скопировал.</p>
+            <div class="tip">Чтобы видео не вылезало за экран телефона: <code>video, iframe { max-width: 100%; }</code></div>
+
+            <h3>Музыка и звук с другого сайта</h3>
+            <p>С музыкой всё так же. На сайтах с музыкой и подкастами (например, SoundCloud или Яндекс Музыка) рядом с треком есть <b>«Поделиться»</b>. Ищи там слова <b>«Встроить»</b>, <b>«HTML-код»</b>, <b>«Код для вставки»</b> или английское <b>Embed</b>. Скопированный код тоже начинается с <code>&lt;iframe</code>, и на твоей странице появится маленький плеер.</p>
+            <table class="ref">
+                <thead><tr><th>Откуда звук или видео</th><th>Каким тегом вставлять</th></tr></thead>
+                <tbody>
+                    <tr><td>Свой файл в папке сайта (<code>.mp3</code>, <code>.mp4</code>)</td><td><code>&lt;audio&gt;</code> или <code>&lt;video&gt;</code> — пишешь сам</td></tr>
+                    <tr><td>Чужой сайт (YouTube, Rutube, VK, музыкальные сервисы)</td><td><code>&lt;iframe&gt;</code> — копируешь готовый код</td></tr>
+                </tbody>
+            </table>
+            <div class="warn">⚠️ Вставляй только то, чем автор разрешил делиться. Если пункта «Встроить» или «HTML-код» нет — значит, автор против. И помни: видео и музыка остаются на чужом сайте. Если автор их удалит, на твоей странице будет пустое окошко — как с <a href="#images">картинками по ссылке</a>.</div>
         </section>
 
         <!-- ===== ПУБЛИКАЦИЯ ===== -->
@@ -1653,7 +1874,7 @@ button {
             <div class="sec-head"><span class="badge">Готово!</span><h2>Публикация сайта на GitHub</h2></div>
             <p class="lead">GitHub Pages бесплатно покажет твой сайт всему интернету по адресу <code>https://твой-логин.github.io/название/</code>. Отмечай галочками, что уже сделано.</p>
             <div class="dict" data-words="GitHub|repository|New repository|Public|Create repository|Add file|Upload files|Commit changes|Settings|Pages|Deploy from a branch|Branch|root|Save"></div>
-            <div class="tip">👨‍👩‍👧 Регистрируйся на GitHub <b>вместе со взрослым</b>: по правилам сервиса свой аккаунт можно заводить с 13 лет.</div>
+            <div class="tip">Регистрируйся на GitHub <b>вместе со взрослым</b>: по правилам сервиса свой аккаунт можно заводить с 13 лет.</div>
 
             <h3>Что куда загружаем</h3>
             <p>Репозиторий на GitHub — это копия папки сайта. Всё, что лежит <b>внутри</b> папки <code>my-site</code>, загружаем <b>прямо в репозиторий</b>: так, чтобы <code>index.html</code> лежал на самом верхнем уровне, а не в какой-нибудь папке.</p>
@@ -1759,7 +1980,7 @@ button {
                     <tr><td>Чем хорош</td><td>им пользуются настоящие программисты</td><td>дружное сообщество самодельных сайтов</td><td>быстрее всех</td></tr>
                 </tbody>
             </table>
-            <div class="tip">💡 Везде главная страница должна называться <code>index.html</code>. Правила про имена файлов и пути одинаковые для всех хостингов. Аккаунты заводи вместе со взрослым.</div>
+            <div class="tip">Везде главная страница должна называться <code>index.html</code>. Правила про имена файлов и пути одинаковые для всех хостингов. Аккаунты заводи вместе со взрослым.</div>
         </section>
 
         <!-- ===== ЧАСТЫЕ ОШИБКИ ===== -->
@@ -1775,7 +1996,41 @@ button {
                 <div class="mistake"><span class="bad">h1::before { color: red; }</span><span class="good">h1::before { content: "★"; }</span><small>у ::before нужен content</small></div>
                 <div class="mistake"><span class="bad">Style.css ≠ style.css</span><span class="good">одно и то же имя</span><small>большие и маленькие буквы важны</small></div>
             </div>
-            <p class="final">Удачи с твоим первым сайтом! 🚀</p>
+        </section>
+
+        <!-- ===== ЧТО ДАЛЬШЕ ===== -->
+        <section id="next" class="sec k-pub">
+            <div class="sec-head"><span class="badge">Напутствие</span><h2>Что дальше: навык на будущее</h2></div>
+            <p class="lead">Собрать сайт своими руками умеют далеко не все взрослые — а ты уже умеешь. Это классный навык, и он может пригодиться: в учёбе, в хобби и даже в будущей работе.</p>
+
+            <h3>Зачем это умение</h3>
+            <ul>
+                <li><b>Сайты нужны всем:</b> магазинам, школам, музыкантам, кружкам, блогерам. И кто-то должен их делать.</li>
+                <li><b>Это настоящие профессии:</b> верстальщик, веб-разработчик, веб-дизайнер. Все они начинали с того же, что и ты: с HTML и CSS.</li>
+                <li><b>Пригодится в любом деле:</b> свой сайт нужен и художнику, и учёному, и спортсмену — чтобы рассказать о себе и своих работах.</li>
+            </ul>
+
+            <h3>Нравится делать сайты? Тренируйся уже сейчас</h3>
+            <ol class="steps">
+                <li><b>Делай маленькие сайты про то, что любишь:</b> питомец, любимая игра, книга, спортивная секция.</li>
+                <li><b>Публикуй каждый сайт</b> на GitHub — у тебя появится ссылка, которую можно показать. Как это сделать, есть в разделе <a href="#publish">«Публикация»</a>.</li>
+                <li><b>Собирай портфолио</b> — отдельную страничку со ссылками на все свои работы.</li>
+                <li><b>Возвращайся к старым сайтам</b> и улучшай их: так лучше всего видно, как ты вырос.</li>
+            </ol>
+            <div class="tip"><b>Портфолио</b> — это коллекция твоих работ. Словам «я умею делать сайты» верят меньше, чем трём готовым сайтам, которые можно открыть и посмотреть. У меня в портфолио пока одно гнездо — зато какое!</div>
+
+            <div class="lab" id="lab-idea">
+                <p class="lab-title">🎲 Попробуй сам: не знаешь, про что сделать сайт? Нажми — подскажу</p>
+                <div class="idea-box">
+                    <button type="button" class="go-btn" data-idea>🎲 Придумай мне идею</button>
+                    <p class="idea-text" aria-live="polite">Здесь появится идея для твоего следующего сайта.</p>
+                </div>
+            </div>
+
+            <h3>От тренировки — к первым заказчикам</h3>
+            <p>Если начать сейчас, через пару лет у тебя за плечами будет опыт и портфолио из настоящих работ. С ними можно искать первых заказчиков. Обычно это знакомые: сайт для школьного кружка, страничка для мастерской соседа, афиша для концерта друзей.</p>
+            <div class="tip">О любых заказах договаривайся вместе со взрослыми: они помогут обсудить условия и проследят, чтобы всё было честно.</div>
+            <p class="final">Удачи с твоим первым сайтом — и со всеми следующими! 🚀</p>
         </section>
 
     </main>
